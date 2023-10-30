@@ -4,7 +4,7 @@
 Desenvolvimento do jogo Torre de hanoi ,da matéria estrutura de dados, do curso Sistemas para Internet do IFSP, campus araraquara
 
 ## Integrantes
-Edenilson Silva Garcia Junior
-Endrew Gomes da Silva
-Gabriel Roberts Silva Soares
-Henrique Ferreira Bispo
+Edenilson Silva Garcia Junior  
+Endrew Gomes da Silva  
+Gabriel Roberts Silva Soares  
+Henrique Ferreira Bispo  
