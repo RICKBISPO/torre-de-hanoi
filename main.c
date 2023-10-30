@@ -73,7 +73,8 @@ bool verifica_acao(Pilha pega, Pilha coloca){
     {
         // Se o valor do disco é menor do que o que está na pilha
         // que irá ser colocado
-        if (get_info(pega) < get_info(coloca)){
+        // OU a pilha onde será colocado está vazia
+        if (get_info(pega) < get_info(coloca) || is_empty(coloca)){
             return true;
         }
     }
