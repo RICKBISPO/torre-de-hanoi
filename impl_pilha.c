@@ -59,6 +59,11 @@ void to_print_todas(Pilha torres[]) {
                 printf("  |  \n");
             }
         }
+    for (int i = 0; i < 5; i++)
+    {
+        printf("\xE2\x80\xBE");
+    }
+    printf("\n");
     }
     printf("\n");
 }
