@@ -3,20 +3,19 @@
 
 void start_game(Pilha pilha[]);
 void jogada(Pilha pilha[], int pega, int coloca);
-bool verifica_acao(Pilha pilha_pega, Pilha pilha_coloca);
+bool verifica_acao(Pilha pega, Pilha coloca);
 
 int main(void)
 {
-    // Limpa o console
-    system("cls");
-
     Pilha pilha[3];
     int pega, coloca, desistir;
 
     start_game(pilha);
-    to_print_todas(pilha);
 
     do{
+        system("cls");
+        to_print_todas(pilha);
+
         printf("Deseja desistir? 1-Sim/2-Nao: ");
         scanf("%d", &desistir);
 
@@ -25,29 +24,29 @@ int main(void)
             printf("0: p1 || 1: p2 || 2: p3\n");
             scanf("%d%d", &pega, &coloca);
 
-            system("cls");
-
             jogada(pilha, pega, coloca);
-            to_print_todas(pilha);
         }
     } while (!is_full(pilha[2]) && desistir != 1);
 
     if (desistir != 1){
         system("cls");
-        printf("Voce ganhou!!!!\n\n");
+        printf("Voce ganhou!!!!\n");
         to_print_todas(pilha);
     }else{
         printf("Voce desistiu!\n");
     }
-    
+
     return 0;
 }
 
 void start_game(Pilha pilha[]){
-    for (int i = 0; i < MAX_STACK_SIZE; i++){
-        init(&pilha[i]);
-    }
+    
+    //inicializa as 3 pilhas
+    init(&pilha[0]);
+    init(&pilha[1]);
+    init(&pilha[2]);
 
+    // Enche a primeira pilha com os discos
     for (int i = MAX_DISCO; i >= 1; i--){
         push(pilha[0], i);
     }
@@ -55,6 +54,8 @@ void start_game(Pilha pilha[]){
 
 void jogada(Pilha pilha[], int pega, int coloca){
  
+    // Se a funcao retornar true, tira de uma torre(indice pega) e 
+    // coloca em outra(indice coloca)
     if (verifica_acao(pilha[pega], pilha[coloca])){
         int temp;
         pop(pilha[pega], &temp);
@@ -64,13 +65,17 @@ void jogada(Pilha pilha[], int pega, int coloca){
     }
 }
 
-bool verifica_acao(Pilha pilha_pega, Pilha pilha_coloca){
-    int resultado = false;
+bool verifica_acao(Pilha pega, Pilha coloca){
 
-    if (!is_empty(pilha_pega) && !is_full(pilha_coloca)){
-        if (get_info(pilha_pega) < get_info(pilha_coloca)){
-            resultado = true;
+    // Se a pilha que irá pegar nao esta vazia &&
+    // se a pilha que vai colocar não está cheia
+    if (!is_empty(pega) && !is_full(coloca))
+    {
+        // Se o valor do disco é menor do que o que está na pilha
+        // que irá ser colocado
+        if (get_info(pega) < get_info(coloca)){
+            return true;
         }
     }
-    return resultado;
+    return false;
 }

@@ -18,8 +18,11 @@ bool push(Pilha pilha, Tipo_Informacao elemento);
 
 bool pop(Pilha pilha, Tipo_Informacao* elemento);
 
+// Imprime todas as torres
 void to_print_todas(Pilha torres[]);
 
+// Serve de complemento para a função acima
 void complemento_to_print(int valor);
 
+// retorna o elemento que está no topo da pilha
 Tipo_Informacao get_info(Pilha pilha);
