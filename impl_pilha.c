@@ -59,9 +59,6 @@ void to_print_todas(Pilha torres[]) {
                 printf("  |  \n");
             }
         }
-        for (int i = 0; i < 5; i++){
-            printf("\xE2\x80\xBE");
-        }
         printf("\n");
     }
     printf("\n");
@@ -72,3 +69,20 @@ void complemento_to_print(int valor) {
     else if (valor == 2) printf(" # # \n");
     else if (valor == 3) printf("# # #\n");
 }
+
+
+void pilha_to_vetor(Pilha pilha, int* array, int size) {
+
+    if (!is_empty(pilha)){
+        for (int i = 0; i < size; i++){
+            int temp = pilha->itens[pilha->topo - i];
+
+            if (temp != 3 || temp != 2 || temp != 1){
+                array[i] = pilha->itens[pilha->topo - i];
+            }else{
+                array[i] = 0;
+            }
+        }
+    }
+}
+

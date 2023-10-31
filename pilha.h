@@ -23,3 +23,8 @@ void to_print_todas(Pilha torres[]);
 
 // Serve de complemento para a função acima
 void complemento_to_print(int valor);
+
+/**
+ * guarda as informações da pilha dentro de um vetor
+*/
+void pilha_to_vetor(Pilha pilha, int* array, int size);
