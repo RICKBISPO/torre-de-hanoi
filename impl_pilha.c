@@ -59,11 +59,10 @@ void to_print_todas(Pilha torres[]) {
                 printf("  |  \n");
             }
         }
-    for (int i = 0; i < 5; i++)
-    {
-        printf("\xE2\x80\xBE");
-    }
-    printf("\n");
+        for (int i = 0; i < 5; i++){
+            printf("\xE2\x80\xBE");
+        }
+        printf("\n");
     }
     printf("\n");
 }
@@ -72,9 +71,4 @@ void complemento_to_print(int valor) {
     if (valor == 1) printf("  #  \n");
     else if (valor == 2) printf(" # # \n");
     else if (valor == 3) printf("# # #\n");
-}
-
-
-Tipo_Informacao get_info(Pilha pilha){
-    return pilha->itens[pilha->topo];
 }
