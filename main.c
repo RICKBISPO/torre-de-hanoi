@@ -117,11 +117,12 @@ void jogada_aleatoria(Pilha pilha[])
          * isso diminui muito o tempo que o while leva para completar o jogo
         */
 
-       if ((temp[0] == 3) && (origem == 3)){
+       if ((temp[0] == 3) && (origem == 2)){
             continue;
         }
-        else if((temp[0] == 2) && (temp[1] == 3) && (origem == 3)){
-            continue;
+        else if((temp[0] == 2) && (temp[1] == 3) && (origem == 2)){
+            destino = 2;
+            origem = rand() % 2;
         }
 
         /**
