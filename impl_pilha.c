@@ -41,6 +41,7 @@ bool pop(Pilha pilha, Tipo_Informacao *elemento){
     if (pilha != NULL){
         if (!is_empty(pilha)){
             *elemento = pilha->itens[pilha->topo];
+            pilha->itens[pilha->topo] = 0;
             pilha->topo -= 1;
             deuCerto = true;
         }
@@ -49,14 +50,18 @@ bool pop(Pilha pilha, Tipo_Informacao *elemento){
 }
 
 void to_print_todas(Pilha torres[]) {
-    
-    for (int i = 0; i < 3; i++) {
-        printf("Torre %d\n", i + 1);
-        for (int j = 2; j >= 0; j--) {
-            if (j <= torres[i]->topo) {
-                complemento_to_print(torres[i]->itens[j]);
-            }else {
-                printf("  |  \n");
+    for (int i = MAX_STACK_SIZE - 1; i >= 0; i--) {
+        for (int j = 0; j < 3; j++) {
+            int temp = torres[j]->itens[i];
+
+            if (temp != 3 & temp != 2 & temp != 1) {
+                printf("  |  ");
+            } else {
+                complemento_to_print(temp);
+            }
+
+            if (j < 2) {
+                printf("\t");
             }
         }
         printf("\n");
@@ -64,10 +69,11 @@ void to_print_todas(Pilha torres[]) {
     printf("\n");
 }
 
+
 void complemento_to_print(int valor) {
-    if (valor == 1) printf("  #  \n");
-    else if (valor == 2) printf(" # # \n");
-    else if (valor == 3) printf("# # #\n");
+    if (valor == 1) printf("  #  ");
+    else if (valor == 2) printf(" # # ");
+    else if (valor == 3) printf("# # #");
 }
 
 
