@@ -1,7 +1,11 @@
 #include "pilha.h"
 #include <time.h>
-// #include <unistd.h> //  (Só funciona no linux)
-#include <windows.h> // (só funciona no windows)
+
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <unistd.h>
+#endif
 
 void start_game(Pilha *pilha);
 void jogada(Pilha origem, Pilha destino);
@@ -13,35 +17,39 @@ int main(void){
     srand((unsigned int)time(NULL));
 
     Pilha pilha[MAX_STACK_SIZE];
-    int origem, destino, desistir;
+    int origem, destino, desiste = false;
 
     start_game(pilha);
 
     do{
-        system("cls"); //system("clear");
+        printf("\033[H\033[J");
         to_print_todas(pilha);
 
-        printf("Deseja desistir? 1-Sim/2-Nao: ");
-        scanf("%d", &desistir);
+        printf("Escolha uma torre de origem e uma de destino:\n");
+        printf("(1) torre 1 || (2) torre 2 || (3) torre 3\n");
+        printf("Ou digite '0 0' para desistir\n");
+        scanf("%d%d", &origem, &destino);
 
-        if (desistir != 1){
-            printf("Escolha uma pilha para retirar e uma para colocar\n");
-            printf("0: p1 || 1: p2 || 2: p3\n");
-            scanf("%d%d", &origem, &destino);
+        if ((origem != 0) && (destino != 0)){
+
+            origem--;
+            destino--;
 
             if (verifica_acao(pilha[origem], pilha[destino])){
                 jogada(pilha[origem], pilha[destino]);
             }
+        }else{
+            desiste = true;
         }
-    } while (!is_full(pilha[2]) && desistir != 1);
 
-    if (desistir != 1 && is_full(pilha[2])){
-        system("cls"); //system("clear");
-        printf("Voce ganhou!!!!\n");
+    } while (!is_full(pilha[2]) && !desiste);
+
+    if (!desiste){
+        printf("\033[H\033[J");
+        printf("----Voce ganhou!----\n");
         to_print_todas(pilha);
     }
     else{
-        printf("Voce desistiu!\n");
         jogada_aleatoria(pilha);
     }
 
@@ -60,7 +68,6 @@ void start_game(Pilha *pilha){
 }
 
 void jogada(Pilha origem, Pilha destino){
-
     int temp;
     pop(origem, &temp);
     push(destino, temp);
@@ -86,8 +93,7 @@ bool verifica_acao(Pilha origem, Pilha destino){
 
         // Se topo de origem for menor que topo de destino
         // OU destino for vazio, retorna true, se nao retorna false
-        if (topo_origem < topo_destino || is_empty(destino))
-        {
+        if (topo_origem < topo_destino || is_empty(destino)){
             return true;
         }
     }
@@ -123,6 +129,7 @@ void jogada_aleatoria(Pilha pilha[])
         else if((temp[0] == 2) && (temp[1] == 3) && (origem == 2)){
             destino = 2;
             origem = rand() % 2;
+            
         }
 
         /**
@@ -132,9 +139,15 @@ void jogada_aleatoria(Pilha pilha[])
 
             jogada(pilha[origem], pilha[destino]);
 
-            system("cls"); //system("clear");
+            printf("\033[H\033[J");
+
             to_print_todas(pilha);
-            Sleep(400); //usleep(400000); (linux)
+
+            #ifdef _WIN32
+                Sleep(400); // No Windows
+            #else
+                usleep(400000); //  (Linux)
+            #endif
         }
     }
 }
