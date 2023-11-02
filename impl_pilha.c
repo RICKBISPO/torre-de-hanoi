@@ -50,16 +50,32 @@ bool pop(Pilha pilha, Tipo_Informacao *elemento){
 }
 
 void to_print_todas(Pilha torres[]) {
+
+    /**
+     * Primeiro for vai rodar 3 vezes, mas com algumas mudanças
+     * para que esse for possa servir para acessar os itens
+     * da pilha
+    */
     for (int i = MAX_STACK_SIZE - 1; i >= 0; i--) {
+
+        /**
+         * O segundo for pega as 3 linhas referentes as 3 linhas 
+         * de cada pilha
+        */
         for (int j = 0; j < 3; j++) {
             int temp = torres[j]->itens[i];
 
+            /**
+             * se temp nao for nenhum dos discos, ele exibe 
+             * uma parte vazia
+             * */ 
             if (temp != 3 & temp != 2 & temp != 1) {
                 printf("  |  ");
-            } else {
-                complemento_to_print(temp);
+            } else{
+                complemento_to_print(temp); //Se nao, ele exibe os '#' conforme o tamanho do disco
             }
 
+            // se j for menor que 2, ele exibe um 'tab' no console
             if (j < 2) {
                 printf("\t");
             }
