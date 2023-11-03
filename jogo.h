@@ -25,4 +25,4 @@ bool verifica_acao(Pilha origem, Pilha destino);
  * Se o jogador desiste, essa função executa vários testes de casos
  * E completa o jogo de onde o usuário terminou
  */
-void jogada_aleatoria(Pilha pilha[]);
+void jogada_aleatoria(SDL_Renderer *renderer, Pilha pilha[]);

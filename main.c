@@ -1,50 +1,45 @@
 #include "pilha.h"
 #include "jogo.h"
 
-void menu();
+void to_print_todas_main (Pilha torres[]);
 
-int main(void){
-
+int main(int argc, char* argv[]) {
+    
     srand((unsigned int)time(NULL));
 
-    Pilha pilha[MAX_STACK_SIZE];
-    int origem, destino, desiste = false;
+    // Inicia tela
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        printf("Erro ao inicializar a SDL: %s\n", SDL_GetError());
+        return -1;
+    }
 
+    // Cria janela
+    SDL_Window* window = SDL_CreateWindow("Torre de Hanoi", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+
+    // Cria render da janela
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+    // Cria um vetor de 3 Pihas 
+    Pilha pilha[MAX_STACK_SIZE];
     start_game(pilha);
 
-    do{
-        to_print_todas(pilha);
-
-        menu();
-        scanf("%d%d", &origem, &destino);
-
-        if (origem == 0 || destino == 0){
-            desiste = true;
-        }
-        else{
-            origem--;
-            destino--;
-
-            if (verifica_acao(pilha[origem], pilha[destino])){
-                jogada(pilha[origem], pilha[destino]);
+    SDL_Event evento;
+    int rodando = 1;
+    while (rodando) {
+        while (SDL_PollEvent(&evento)) {
+            if (evento.type == SDL_QUIT) {
+                rodando = 0;
             }
+            to_print_todas_sdl(renderer, pilha);
+            jogada_aleatoria(renderer, pilha);
+            SDL_RenderPresent(renderer);
         }
-
-    } while (!is_full(pilha[2]) && !desiste);
-
-    if (!desiste){
-        printf("----Voce ganhou!----\n");
     }
-    else{
-        jogada_aleatoria(pilha);
-        printf("----Voce Perdeu e o PC fez por voce!----\n");
-    }
+    
+    // Fechar janela
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
 
     return 0;
-}
-
-void menu(){
-    printf("Escolha uma torre de origem e uma de destino:\n");
-    printf("(1) torre 1 || (2) torre 2 || (3) torre 3\n");
-    printf("Ou digite '0 0' para desistir\n");  
 }

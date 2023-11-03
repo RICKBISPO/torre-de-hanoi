@@ -85,6 +85,57 @@ void complemento_to_print(int valor) {
     else if (valor == 3) printf("# # #");
 }
 
+
+void to_print_todas_sdl(SDL_Renderer *renderer, Pilha torres[]) {
+    
+    // define render com uma cor
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+
+    int x_base = 100; // Posição inicial X da primeira torre
+    int y_base = 400; // Posição inicial Y da base das torres
+    int torre_spacing = 250; // Espaçamento entre torres
+    int disk_height = 20; // Altura dos discos
+
+    for (int i = 0; i < MAX_STACK_SIZE; i++) {
+        
+        int x_torre = x_base + i * torre_spacing;
+
+        for (int j = 0; j < MAX_STACK_SIZE; j++) {
+
+            int disco = torres[i]->itens[j];
+            int y_disco = y_base - j * disk_height;
+            
+            // Desenhe o disco (#)
+            if (disco == 1) {
+                SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Cor vermelha
+                SDL_Rect rect = {x_torre - 20, y_disco - 10, 40, 20};
+                SDL_RenderFillRect(renderer, &rect);
+            } else if (disco == 2) {
+                SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255); // Cor verde
+                SDL_Rect rect = {x_torre - 30, y_disco - 10, 60, 20};
+                SDL_RenderFillRect(renderer, &rect);
+            } else if (disco == 3) {
+                SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255); // Cor azul
+                SDL_Rect rect = {x_torre - 40, y_disco - 10, 80, 20};
+                SDL_RenderFillRect(renderer, &rect);
+            }
+            else {
+                // Desenhe a haste (|)
+                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Cor azul
+                SDL_Rect rect = {x_torre - 2.5, y_disco - 10, 5, 20};
+                SDL_RenderFillRect(renderer, &rect);
+            } 
+        }
+    }
+
+    
+    SDL_Delay(1000);
+    SDL_RenderPresent(renderer);
+
+}
+
+
 void pilha_to_vetor(Pilha pilha, int* array, int size) {
 
     if (!is_empty(pilha)){
