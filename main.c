@@ -1,15 +1,30 @@
 #include "pilha.h"
-#include <time.h>
 
-#ifdef _WIN32
-#include <windows.h>
-#else
-#include <unistd.h>
-#endif
-
+/**
+ * Inicializa o jogo, ou seja, init() em 3 pilhas e
+ * enche a ultima pilha com os valores (3,2,1)
+ */
 void start_game(Pilha *pilha);
+
+/**
+ * Funcao que faz uma jogada. Tira de uma torre
+ * e coloca em outra
+ */
 void jogada(Pilha origem, Pilha destino);
+
+/**
+ * Funcao que verifica se é possivel fazer uma jogada:
+ * Primeiro verifica se a pilha de origem não está vazia e
+ * se a pilha de destino não está cheia
+ * Depois compara os topos de cada pilha (topo-origem < topo-destino)
+ * Ou se o destino está vazio
+ */
 bool verifica_acao(Pilha origem, Pilha destino);
+
+/**
+ * Se o jogador desiste, essa função executa vários testes de casos
+ * E completa o jogo de onde o usuário terminou
+ */
 void jogada_aleatoria(Pilha pilha[]);
 
 int main(void){
@@ -22,7 +37,6 @@ int main(void){
     start_game(pilha);
 
     do{
-        printf("\033[H\033[J");
         to_print_todas(pilha);
 
         printf("Escolha uma torre de origem e uma de destino:\n");
@@ -38,19 +52,20 @@ int main(void){
             if (verifica_acao(pilha[origem], pilha[destino])){
                 jogada(pilha[origem], pilha[destino]);
             }
-        }else{
+        }
+        else{
             desiste = true;
         }
 
     } while (!is_full(pilha[2]) && !desiste);
 
     if (!desiste){
-        printf("\033[H\033[J");
-        printf("----Voce ganhou!----\n");
         to_print_todas(pilha);
+        printf("----Voce ganhou!----\n");
     }
     else{
         jogada_aleatoria(pilha);
+        printf("----Voce Perdeu e o PC fez por voce!----\n");
     }
 
     return 0;
@@ -76,78 +91,95 @@ void jogada(Pilha origem, Pilha destino){
 bool verifica_acao(Pilha origem, Pilha destino){
     int topo_origem, topo_destino;
 
-    // se origem nao estiver vazio e destino nao estiver cheio
     if (!is_empty(origem) && !is_full(destino)){
 
-        // Se destino nao estiver vazio
-        if (!is_empty(destino))
-        {
-            // guarda o topo do destino
+        if (!is_empty(destino)){
             pop(destino, &topo_destino);
             push(destino, topo_destino);
         }
+        else{
+            topo_destino = topo_origem++;
+        }
 
-        // guarda o topo do origem
         pop(origem, &topo_origem);
         push(origem, topo_origem);
 
-        // Se topo de origem for menor que topo de destino
-        // OU destino for vazio, retorna true, se nao retorna false
-        if (topo_origem < topo_destino || is_empty(destino)){
+        if (topo_origem < topo_destino){
             return true;
         }
     }
     return false;
 }
 
-void jogada_aleatoria(Pilha pilha[])
-{
+void jogada_aleatoria(Pilha pilha[]){
     int origem, destino;
-    int temp[MAX_STACK_SIZE];
+    int t1[MAX_STACK_SIZE];
+    int t2[MAX_STACK_SIZE];
+    int t3[MAX_STACK_SIZE];
 
-    // Enquanto a terceira pilha nao estiver cheia
+    pilha_to_vetor(pilha[0], t1, MAX_STACK_SIZE);
+    pilha_to_vetor(pilha[1], t2, MAX_STACK_SIZE);
+    pilha_to_vetor(pilha[2], t3, MAX_STACK_SIZE);
+
     while (!is_full(pilha[2])){
 
-        // cria dois randons que servirao de indice para as pilhas
         origem = rand() % 3;
         destino = rand() % 3;
 
-        // passa a terceira pilha para dentro do vetor
-        pilha_to_vetor(pilha[2], temp, MAX_STACK_SIZE);
+        // Caso onde a Torre 1 ou 2 estão cheias,
+        // conforme cada caso, ele executa uma matriz
+        // que contém o gabarito
+        if (is_full(pilha[0]) || is_full(pilha[1])){
 
-        /**
-         * Quando a terceira pilha possui apenas o disco 3,
-         * o array[0] tem o valor de 3 se isso for verdade, 
-         * ele pula para a próxima repeticao do while, não tirando essa peça do seu lugar
-         * O mesmo acontece se (temp[0] == 2) && (temp[1] == 3)
-         * isso diminui muito o tempo que o while leva para completar o jogo
-        */
+            int passos[7][2];
 
-       if ((temp[0] == 3) && (origem == 2)){
-            continue;
+            if (is_full(pilha[0])){
+                int temp[7][2] = {{0, 2}, {0, 1}, {2, 1}, {0, 2}, {1, 0}, {1, 2}, {0, 2}};
+                memcpy(passos, temp, sizeof(temp));
+            }
+            else if (is_full(pilha[1])){
+                int temp[7][2] = {{0, 2}, {0, 1}, {2, 1}, {0, 2}, {1, 0}, {1, 2}, {0, 2}};
+                memcpy(passos, temp, sizeof(temp));
+            }
+
+            for (int i = 0; i < 7; i++){
+                origem = passos[i][0];
+                destino = passos[i][1];
+
+                jogada(pilha[origem], pilha[destino]);
+                to_print_todas(pilha);
+            }
         }
-        else if((temp[0] == 2) && (temp[1] == 3) && (origem == 2)){
+        // Se a torre 3 já estiver com os discos 2 e 3, ele acha o último disco
+        // e coloca ele na torre 3
+        else if (t3[1] == 3){
             destino = 2;
-            origem = rand() % 2;
-            
+
+            if (t1[0] == 1)
+                origem = 0;
+            else
+                origem = 1;
         }
 
-        /**
-         * chama a funcao que verifica se a jogada pode ser feita
-        */
-        if (verifica_acao(pilha[origem], pilha[destino])){
+        // Caso onde a torre 3 tem apenas o disco 3 e
+        // alguma das outras torres tem apenas o disco 2
+        else if ((t3[0] == 3)){
+
+            if (t1[0] == 2){
+                origem = 0;
+                destino = 2;
+            }
+
+            else if (t2[0] == 2){
+                origem = 1;
+                destino = 2;
+            }
+        }
+
+        if (verifica_acao(pilha[origem], pilha[destino]) && !is_full(pilha[2])){
 
             jogada(pilha[origem], pilha[destino]);
-
-            printf("\033[H\033[J");
-
             to_print_todas(pilha);
-
-            #ifdef _WIN32
-                Sleep(400); // No Windows
-            #else
-                usleep(400000); //  (Linux)
-            #endif
         }
     }
 }
