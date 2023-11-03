@@ -1,8 +1,6 @@
 #include "pilha.h"
 #include "jogo.h"
 
-void to_print_todas_main (Pilha torres[]);
-
 int main(int argc, char* argv[]) {
     
     srand((unsigned int)time(NULL));
