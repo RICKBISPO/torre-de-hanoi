@@ -49,6 +49,15 @@ bool pop(Pilha pilha, Tipo_Informacao *elemento){
     return deuCerto;
 }
 
+void freePilha(Pilha* pilha){
+    if (*pilha != NULL) {
+        free(*pilha);
+        *pilha = NULL; 
+    }
+}
+
+
+
 void to_print_todas(Pilha torres[]) {
 
     printf("\033[H\033[J");
@@ -130,7 +139,7 @@ void to_print_todas_sdl(SDL_Renderer *renderer, Pilha torres[]) {
     }
 
     
-    SDL_Delay(1000);
+    SDL_Delay(400);
     SDL_RenderPresent(renderer);
 
 }
