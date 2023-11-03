@@ -27,6 +27,11 @@ bool verifica_acao(Pilha origem, Pilha destino);
  */
 void jogada_aleatoria(Pilha pilha[]);
 
+/**
+ * Exibe o menu ao jogador
+*/
+void menu();
+
 int main(void){
 
     srand((unsigned int)time(NULL));
@@ -39,13 +44,13 @@ int main(void){
     do{
         to_print_todas(pilha);
 
-        printf("Escolha uma torre de origem e uma de destino:\n");
-        printf("(1) torre 1 || (2) torre 2 || (3) torre 3\n");
-        printf("Ou digite '0 0' para desistir\n");
+        menu();
         scanf("%d%d", &origem, &destino);
 
-        if ((origem != 0) && (destino != 0)){
-
+        if (origem == 0 || destino == 0){
+            desiste = true;
+        }
+        else{
             origem--;
             destino--;
 
@@ -53,14 +58,10 @@ int main(void){
                 jogada(pilha[origem], pilha[destino]);
             }
         }
-        else{
-            desiste = true;
-        }
 
     } while (!is_full(pilha[2]) && !desiste);
 
     if (!desiste){
-        to_print_todas(pilha);
         printf("----Voce ganhou!----\n");
     }
     else{
@@ -70,6 +71,13 @@ int main(void){
 
     return 0;
 }
+
+void menu(){
+    printf("Escolha uma torre de origem e uma de destino:\n");
+    printf("(1) torre 1 || (2) torre 2 || (3) torre 3\n");
+    printf("Ou digite '0 0' para desistir\n");  
+}
+
 
 void start_game(Pilha *pilha){
 
@@ -138,7 +146,7 @@ void jogada_aleatoria(Pilha pilha[]){
                 memcpy(passos, temp, sizeof(temp));
             }
             else if (is_full(pilha[1])){
-                int temp[7][2] = {{0, 2}, {0, 1}, {2, 1}, {0, 2}, {1, 0}, {1, 2}, {0, 2}};
+                int temp[7][2] = {{1, 2}, {1, 0}, {2, 0}, {1, 2}, {0, 1}, {0, 2}, {1, 2}};
                 memcpy(passos, temp, sizeof(temp));
             }
 
@@ -150,6 +158,33 @@ void jogada_aleatoria(Pilha pilha[]){
                 to_print_todas(pilha);
             }
         }
+
+        // caso onde a torre 1 já tem o disco 3 e 2
+        // o if acha o disco 1 e coloca ele encima dessa torre
+        // após isso, no próximo while, ele irá entrar no primeiro if,
+        // onde é torre 1 == full
+        else if(t1[0] == 2 && t1[1] == 3){
+            destino = 0;
+
+            if (t2[0] == 1)
+                origem = 1;
+            else
+                origem = 2;
+        }
+
+        // caso onde a torre 2 já tem o disco 3 e 2
+        // o if acha o disco 1 e coloca ele encima dessa torre
+        // após isso, no próximo while, ele irá entrar no primeiro if,
+        // onde é torre 2 == full
+        else if(t2[0] == 2 && t2[1] == 3){
+            destino = 1;
+
+            if (t1[0] == 1)
+                origem = 0;
+            else
+                origem = 2;
+        }
+
         // Se a torre 3 já estiver com os discos 2 e 3, ele acha o último disco
         // e coloca ele na torre 3
         else if (t3[1] == 3){
@@ -161,20 +196,12 @@ void jogada_aleatoria(Pilha pilha[]){
                 origem = 1;
         }
 
-        // Caso onde a torre 3 tem apenas o disco 3 e
-        // alguma das outras torres tem apenas o disco 2
-        else if ((t3[0] == 3)){
-
-            if (t1[0] == 2){
-                origem = 0;
-                destino = 2;
-            }
-
-            else if (t2[0] == 2){
-                origem = 1;
-                destino = 2;
-            }
+        // Caso onde a torre 3 tem apenas o disco 3 e origem é essa torre
+        // ele pula essa repeticao
+        else if ((t3[0] == 3) && origem == 2){
+            continue;
         }
+
 
         if (verifica_acao(pilha[origem], pilha[destino]) && !is_full(pilha[2])){
 
