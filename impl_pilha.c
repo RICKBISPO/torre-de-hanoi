@@ -58,7 +58,7 @@ void to_print_todas(Pilha torres[]) {
         for (int j = 0; j < 3; j++) {
             int temp = torres[j]->itens[i];
 
-            if (temp != 3 & temp != 2 & temp != 1) {
+            if ((temp != 3) && (temp != 2) && (temp != 1)) {
                 printf("  |  ");
             } else{
                 complemento_to_print(temp);
@@ -91,7 +91,7 @@ void pilha_to_vetor(Pilha pilha, int* array, int size) {
         for (int i = 0; i < size; i++){
             int temp = pilha->itens[pilha->topo - i];
 
-            if (temp != 3 || temp != 2 || temp != 1){
+            if ((temp != 3) || (temp != 2) || (temp != 1)){
                 array[i] = pilha->itens[pilha->topo - i];
             }else{
                 array[i] = 0;
@@ -99,4 +99,3 @@ void pilha_to_vetor(Pilha pilha, int* array, int size) {
         }
     }
 }
-
