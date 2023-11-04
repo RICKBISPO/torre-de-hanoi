@@ -33,12 +33,7 @@ Navegue até a pasta do projeto e execute esse comando no terminal:
 
 Para windows:
 ```bash
-gcc -o programa.exe impl_pilha.c main.c
-```
-
-Para linux:
-```bash
-gcc -o programa impl_pilha.c main.c
+gcc main.c impl_jogo.c impl_pilha.c -o programa.exe -I .\SDL2\i686-w64-mingw32\include -L .\SDL2\i686-w64-mingw32\lib -lmingw32 -lSDL2main -lSDL2 -mwindows
 ```
 
 ### 3. Executar o programa compilado
@@ -46,11 +41,6 @@ gcc -o programa impl_pilha.c main.c
 Após ter compilado o projeto seguindo as instruções acima, execute o projeto digitando:
 
 Para windows:
-```bash
-./programa.exe
-```
-
-Para linux:
 ```bash
 ./programa
 ```
