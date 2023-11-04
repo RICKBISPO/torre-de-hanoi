@@ -26,6 +26,8 @@ bool push(Pilha pilha, Tipo_Informacao elemento);
 
 bool pop(Pilha pilha, Tipo_Informacao* elemento);
 
+void freePilha(Pilha* pilha);
+
 /**
  * Imprime todas as torres
 */

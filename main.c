@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
 
     SDL_Event evento;
     int rodando = 1;
-    while (rodando) {
+    while (rodando && !is_full(pilha[2])) {
         while (SDL_PollEvent(&evento)) {
             if (evento.type == SDL_QUIT) {
                 rodando = 0;
@@ -39,5 +39,10 @@ int main(int argc, char* argv[]) {
     SDL_DestroyWindow(window);
     SDL_Quit();
 
+
+    for (int i = 0; i < 3; i++){
+        destroy_pilha(pilha[i]);
+    }
+    
     return 0;
 }
