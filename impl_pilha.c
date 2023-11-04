@@ -49,50 +49,13 @@ bool pop(Pilha pilha, Tipo_Informacao *elemento){
     return deuCerto;
 }
 
-void to_print_todas(Pilha torres[]) {
-
-    printf("\033[H\033[J");
-
-    for (int i = MAX_STACK_SIZE - 1; i >= 0; i--) {
-
-        for (int j = 0; j < 3; j++) {
-            int temp = torres[j]->itens[i];
-
-            if ((temp != 3) && (temp != 2) && (temp != 1)) {
-                printf("  |  ");
-            } else{
-                complemento_to_print(temp);
-            }
-            if (j < 2) {
-                printf("\t");
-            }
-        }
-        printf("\n");
-    }
-    printf("\n");
-
-    #ifdef _WIN32
-    Sleep(400); // No Windows
-    #else
-        usleep(400000); //  (Linux)
-    #endif
-
-}
-
-void complemento_to_print(int valor) {
-    if (valor == 1) printf("  #  ");
-    else if (valor == 2) printf(" # # ");
-    else if (valor == 3) printf("# # #");
-}
-
-
 void to_print_todas_sdl(SDL_Renderer *renderer, Pilha torres[]) {
     
     // define render com uma cor
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    int x_base = 100; // Posição inicial X da primeira torre
+    int x_base = 150; // Posição inicial X da primeira torre
     int y_base = 400; // Posição inicial Y da base das torres
     int torre_spacing = 250; // Espaçamento entre torres
     int disk_height = 20; // Altura dos discos
@@ -105,7 +68,13 @@ void to_print_todas_sdl(SDL_Renderer *renderer, Pilha torres[]) {
 
             int disco = torres[i]->itens[j];
             int y_disco = y_base - j * disk_height;
-            
+
+            // Desenhe a base (_)
+            if (j == 0){
+                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Cor branca
+                SDL_Rect rect = {x_torre - 50, y_disco + 10, 100, 5};
+                SDL_RenderFillRect(renderer, &rect);
+            }
             // Desenhe o disco (#)
             if (disco == 1) {
                 SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Cor vermelha
@@ -120,21 +89,19 @@ void to_print_todas_sdl(SDL_Renderer *renderer, Pilha torres[]) {
                 SDL_Rect rect = {x_torre - 40, y_disco - 10, 80, 20};
                 SDL_RenderFillRect(renderer, &rect);
             }
+            // Desenhe a haste (|)
             else {
-                // Desenhe a haste (|)
-                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Cor azul
+                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Cor branca
                 SDL_Rect rect = {x_torre - 2.5, y_disco - 10, 5, 20};
                 SDL_RenderFillRect(renderer, &rect);
-            } 
+            }
         }
     }
 
-    
     SDL_Delay(1000);
     SDL_RenderPresent(renderer);
 
 }
-
 
 void pilha_to_vetor(Pilha pilha, int* array, int size) {
 
