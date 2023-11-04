@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "jogo.h": "c",
+        "sdl.h": "c",
+        "ARQUIVO.C": "cpp"
+    }
+}
