@@ -49,6 +49,13 @@ bool pop(Pilha pilha, Tipo_Informacao *elemento){
     return deuCerto;
 }
 
+void freePilha(Pilha* pilha){
+    if (*pilha != NULL) {
+        free(*pilha);
+        *pilha = NULL; 
+    }
+}
+
 void to_print_todas_sdl(SDL_Renderer *renderer, Pilha torres[]) {
     
     // define render com uma cor
@@ -100,7 +107,6 @@ void to_print_todas_sdl(SDL_Renderer *renderer, Pilha torres[]) {
 
     SDL_Delay(1000);
     SDL_RenderPresent(renderer);
-
 }
 
 void pilha_to_vetor(Pilha pilha, int* array, int size) {

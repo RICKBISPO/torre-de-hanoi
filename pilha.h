@@ -26,6 +26,9 @@ bool push(Pilha pilha, Tipo_Informacao elemento);
 
 bool pop(Pilha pilha, Tipo_Informacao* elemento);
 
+/**
+ * Limpa o espaço de memoria onde foi alocado uma pilha
+*/
 void freePilha(Pilha* pilha);
 
 /**

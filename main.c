@@ -39,10 +39,8 @@ int main(int argc, char* argv[]) {
     SDL_DestroyWindow(window);
     SDL_Quit();
 
-
-    for (int i = 0; i < 3; i++){
-        destroy_pilha(pilha[i]);
-    }
+    // Limpar pilha
+    freePilha(pilha);
     
     return 0;
 }
