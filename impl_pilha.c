@@ -57,13 +57,18 @@ void freePilha(Pilha* pilha){
 }
 
 void to_print_todas_sdl(SDL_Renderer *renderer, Pilha torres[]) {
-    
-    // define render com uma cor
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderClear(renderer);
+
+    SDL_Texture* backgroundTexture = IMG_LoadTexture(renderer, "assets/1.png");
+
+    if (backgroundTexture == NULL) {
+        printf("Erro ao carregar a imagem de fundo: %s\n", SDL_GetError());
+        // Lidar com o erro, se necessário.
+    }
+
+    SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
 
     int x_base = 150; // Posição inicial X da primeira torre
-    int y_base = 400; // Posição inicial Y da base das torres
+    int y_base = 370; // Posição inicial Y da base das torres
     int torre_spacing = 250; // Espaçamento entre torres
     int disk_height = 20; // Altura dos discos
 
@@ -78,7 +83,7 @@ void to_print_todas_sdl(SDL_Renderer *renderer, Pilha torres[]) {
 
             // Desenhe a base (_)
             if (j == 0){
-                SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Cor Preta
+                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Cor Preta
                 SDL_Rect rect = {x_torre - 50, y_disco + 10, 100, 5};
                 SDL_RenderFillRect(renderer, &rect);
             }
@@ -98,7 +103,7 @@ void to_print_todas_sdl(SDL_Renderer *renderer, Pilha torres[]) {
             }
             // Desenhe a haste (|)
             else {
-                SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Cor Preta
+                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Cor Preta
                 SDL_Rect rect = {x_torre - 2.5, y_disco - 10, 5, 20};
                 SDL_RenderFillRect(renderer, &rect);
             }
@@ -106,6 +111,8 @@ void to_print_todas_sdl(SDL_Renderer *renderer, Pilha torres[]) {
     }
 
     // SDL_Delay(400);
+    SDL_DestroyTexture(backgroundTexture);
+
 }
 
 void pilha_to_vetor(Pilha pilha, int* array, int size) {

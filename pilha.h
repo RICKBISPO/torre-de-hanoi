@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <time.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #ifdef _WIN32
 #include <windows.h>

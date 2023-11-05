@@ -42,7 +42,7 @@ int main(int argc, char *argv[]){
         buttons[i].rect = (SDL_Rect)
                                     {
                                      100 + i * 250, // x: horizontal em relacao a borda
-                                     350,           // y: vertical em relacao ao comeco do programa
+                                     320,           // y: vertical em relacao ao comeco do programa
                                      100,           // w: largura do retangulo 
                                      65             // h: altura do retangulo 
                                      };
