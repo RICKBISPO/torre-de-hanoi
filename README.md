@@ -1,6 +1,6 @@
 # Torre de Hanoi
 
-![Imagem](https://github.com/edenilsonjunior/torre-de-hanoi/assets/110670578/bbac9cc2-fa7d-4465-9f04-002a6ba44b35)
+![image](https://github.com/edenilsonjunior/torre-de-hanoi/assets/110670578/c66766b3-882b-443d-9efa-f716889fbfa1)
 
 Projeto desenvolvido como parte da disciplina de Estrutura de Dados do curso de Sistemas para Internet no IFSP, Campus Araraquara.
 
@@ -33,7 +33,7 @@ Navegue até a pasta do projeto e execute esse comando no terminal:
 
 Para windows:
 ```bash
-gcc main.c impl_jogo.c impl_pilha.c -o programa.exe -I .\SDL2\i686-w64-mingw32\include -L .\SDL2\i686-w64-mingw32\lib -lmingw32 -lSDL2main -lSDL2 -mwindows
+gcc main.c impl_jogo.c impl_pilha.c -o programa.exe -I .\SDL2\i686-w64-mingw32\include -L .\SDL2\i686-w64-mingw32\lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
 ```
 
 ### 3. Executar o programa compilado
