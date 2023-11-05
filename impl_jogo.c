@@ -56,10 +56,6 @@ void jogada_aleatoria(SDL_Renderer *renderer, Pilha pilha[]){
         origem = rand() % 3;
         destino = rand() % 3;
 
-        // Caso onde a Torre 1 ou 2 estão cheias,
-        // conforme cada caso, ele executa uma matriz
-        // que contém o gabarito
-
         if (is_full(pilha[0]) || is_full(pilha[1])){
 
             int passos[7][2];
@@ -79,13 +75,10 @@ void jogada_aleatoria(SDL_Renderer *renderer, Pilha pilha[]){
 
                 jogada(pilha[origem], pilha[destino]);
                 to_print_todas_sdl(renderer, pilha);
+                SDL_RenderPresent(renderer);
             }
         }
 
-        // caso onde a torre 1 já tem o disco 3 e 2
-        // o if acha o disco 1 e coloca ele encima dessa torre
-        // após isso, no próximo while, ele irá entrar no primeiro if,
-        // onde é torre 1 == full
         else if(t1[0] == 2 && t1[1] == 3){
             destino = 0;
 
@@ -95,10 +88,6 @@ void jogada_aleatoria(SDL_Renderer *renderer, Pilha pilha[]){
                 origem = 2;
         }
 
-        // caso onde a torre 2 já tem o disco 3 e 2
-        // o if acha o disco 1 e coloca ele encima dessa torre
-        // após isso, no próximo while, ele irá entrar no primeiro if,
-        // onde é torre 2 == full
         else if(t2[0] == 2 && t2[1] == 3){
             destino = 1;
 
@@ -108,8 +97,6 @@ void jogada_aleatoria(SDL_Renderer *renderer, Pilha pilha[]){
                 origem = 2;
         }
 
-        // Se a torre 3 já estiver com os discos 2 e 3, ele acha o último disco
-        // e coloca ele na torre 3
         else if (t3[1] == 3){
             destino = 2;
 
@@ -119,8 +106,6 @@ void jogada_aleatoria(SDL_Renderer *renderer, Pilha pilha[]){
                 origem = 1;
         }
 
-        // Caso onde a torre 3 tem apenas o disco 3 e origem é essa torre
-        // ele pula essa repeticao
         else if ((t3[0] == 3) && origem == 2){
             continue;
         }
