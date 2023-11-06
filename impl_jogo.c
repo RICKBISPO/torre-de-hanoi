@@ -40,7 +40,7 @@ bool verifica_acao(Pilha origem, Pilha destino){
     return false;
 }
 
-void jogada_aleatoria(SDL_Renderer *renderer, Pilha pilha[]){
+void jogada_aleatoria(SDL_Renderer *renderer, Pilha pilha[], int pausa){
 
     int origem, destino;
     int t1[MAX_STACK_SIZE];
@@ -74,7 +74,7 @@ void jogada_aleatoria(SDL_Renderer *renderer, Pilha pilha[]){
                 destino = passos[i][1];
 
                 jogada(pilha[origem], pilha[destino]);
-                to_print_todas_sdl(renderer, pilha);
+                to_print_todas_sdl(renderer, pilha, pausa);
                 SDL_RenderPresent(renderer);
             }
         }
@@ -113,7 +113,7 @@ void jogada_aleatoria(SDL_Renderer *renderer, Pilha pilha[]){
         if (verifica_acao(pilha[origem], pilha[destino]) && !is_full(pilha[2])){
 
             jogada(pilha[origem], pilha[destino]);
-            to_print_todas_sdl(renderer, pilha);
+            to_print_todas_sdl(renderer, pilha, pausa);
         }
     }
 }

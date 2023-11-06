@@ -14,6 +14,8 @@ typedef struct Button{
 // Imprime os 3 botoes que representam as torres
 void to_print_botoes(SDL_Renderer *renderer, Button botoes[]);
 
+void resetar_jogo(Pilha pilha[]);
+
 int main(int argc, char *argv[]){
 
     // Inicia aleatorio
@@ -39,8 +41,8 @@ int main(int argc, char *argv[]){
     start_game(pilha);
 
     // Cria 3 botoes para as pilhas
-    // E cria o tamanho de cada um
-    Button buttons[3];
+    // E cria 3 botoes de opcoes
+    Button buttons[6];
 
     for (int i = 0; i < 3; i++){
         buttons[i].rect = (SDL_Rect)
@@ -52,6 +54,19 @@ int main(int argc, char *argv[]){
                                      };
         buttons[i].index = i;
     }
+
+
+    // reiniciar jogo
+    buttons[3].rect = (SDL_Rect){82, 457, 140, 20};
+    buttons[3].index = 3;
+
+    // desistir
+    buttons[4].rect = (SDL_Rect){338, 457, 126, 20};
+    buttons[4].index = 4;
+
+    // fechar jogo
+    buttons[5].rect = (SDL_Rect){568, 457, 178, 20};
+    buttons[5].index = 5;
 
     // Variaveis de evento e condição de parada
     SDL_Event evento;
@@ -69,7 +84,8 @@ int main(int argc, char *argv[]){
     int contador = 0;
 
     // Enquanto não fechar a janela && a terceira torre nao estiver cheia
-    while (!parou && !is_full(pilha[2])){
+    while (!parou){
+        
         
         // Esse while depende de eventos, nesse caso são:
         // Se fechar a janela e se ocorrer o clique do mouse
@@ -87,41 +103,57 @@ int main(int argc, char *argv[]){
                 SDL_GetMouseState(&mouseX, &mouseY);
 
                 // Verifica se o mouse clicou dentro de alguma torre
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < 6; i++) {
                     if (mouseX >= buttons[i].rect.x && mouseX <= (buttons[i].rect.x + buttons[i].rect.w) &&
                         mouseY >= buttons[i].rect.y && mouseY <= (buttons[i].rect.y + buttons[i].rect.h)) {
 
-                        printf("indice %d\n", buttons[i].index);
-                        temp = buttons[i].index;
+                        if (buttons[i].index < 3)
+                        {
+                            printf("indice %d\n", buttons[i].index);
+                            temp = buttons[i].index;
+                        }
+                        else if (buttons[i].index == 3){ // reiniciar jogo
+                            resetar_jogo(pilha);
+                            contador = 0;
+                            continue;
+                        }
+                        else if(buttons[i].index == 4){ // desistir
+                            jogada_aleatoria(renderer, pilha, true);
+                            continue;
+                        }
+                        else if(buttons[i].index == 5){ // Sair
+                            parou = true;
+                            break;
+                        }
                     }
                 }
-                // Se for o primeiro click ou nao
 
-                if (primeiro){
-                    origem = temp;
-                    primeiro = false;
-                }
-                else if(!primeiro){
-                    destino = temp;
-                    primeiro = true;
-
-                    if (verifica_acao(pilha[origem], pilha[destino])){
-                        jogada(pilha[origem], pilha[destino]);
-                        contador++; 
+                if (temp == 0 || temp == 1 || temp == 2)
+                {
+                    if (primeiro){
+                        origem = temp;
+                        primeiro = false;
                     }
-                    system("cls");
-                    printf("jogadas: %d\n", contador);
+                    else if(!primeiro){
+                        destino = temp;
+                        primeiro = true;
+
+                        if (verifica_acao(pilha[origem], pilha[destino])){
+                            jogada(pilha[origem], pilha[destino]);
+                            contador++; 
+                        }
+                        system("cls");
+                        printf("jogadas: %d\n", contador);
+                    }
                 }
+                
             }   
         }
 
-        // jogada_aleatoria(renderer, pilha);
-    
         // exibe as torres e plano de fundo
-        to_print_todas_sdl(renderer, pilha);
+        to_print_todas_sdl(renderer, pilha, false);
     
-        // exibe os botoes
-        to_print_botoes(renderer, buttons);
+        // to_print_botoes(renderer, buttons);
 
         // atualiza a tela
         SDL_RenderPresent(renderer);
@@ -140,11 +172,20 @@ int main(int argc, char *argv[]){
     return 0;
 }
 
+void resetar_jogo(Pilha pilha[]){
+    // Limpar pilha
+    for (int i = 0; i < 3; i++){
+        freePilha(&pilha[i]);
+    }
+
+    start_game(pilha);
+}
+
 void to_print_botoes(SDL_Renderer *renderer, Button botoes[]){
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 6; i++)
     {
         // Desenha um botao transparente que fica encima da torre
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0); 
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 128); 
         SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND); 
         SDL_RenderFillRect(renderer, &botoes[i].rect);
     }

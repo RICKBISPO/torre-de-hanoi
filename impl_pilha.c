@@ -56,9 +56,9 @@ void freePilha(Pilha* pilha){
     }
 }
 
-void to_print_todas_sdl(SDL_Renderer *renderer, Pilha torres[]) {
+void to_print_todas_sdl(SDL_Renderer *renderer, Pilha torres[], int pausa){
 
-    SDL_Texture* backgroundTexture = IMG_LoadTexture(renderer, "assets/1.png");
+    SDL_Texture* backgroundTexture = IMG_LoadTexture(renderer, "assets/att.png");
 
     SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
 
@@ -82,19 +82,31 @@ void to_print_todas_sdl(SDL_Renderer *renderer, Pilha torres[]) {
                 SDL_Rect rect = {x_torre - 50, y_disco + 10, 100, 5};
                 SDL_RenderFillRect(renderer, &rect);
             }
-            // Desenhe o disco (#)
+            // Desenhe o disco (#) com uma borda
             if (disco == 1) {
                 SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Cor vermelha
                 SDL_Rect rect = {x_torre - 20, y_disco - 10, 40, 20};
                 SDL_RenderFillRect(renderer, &rect);
+
+                // Desenhe a borda
+                SDL_SetRenderDrawColor(renderer, 109, 0, 0, 255); // Vermelho escuro rgba(109, 0, 0, 255)
+                SDL_RenderDrawRect(renderer, &rect);
             } else if (disco == 2) {
                 SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255); // Cor verde
                 SDL_Rect rect = {x_torre - 30, y_disco - 10, 60, 20};
                 SDL_RenderFillRect(renderer, &rect);
+
+                // Desenhe a borda
+                SDL_SetRenderDrawColor(renderer, 2, 111, 2, 255); // Verde escuro rgba(2, 111, 2, 255)
+                SDL_RenderDrawRect(renderer, &rect);
             } else if (disco == 3) {
                 SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255); // Cor azul
                 SDL_Rect rect = {x_torre - 40, y_disco - 10, 80, 20};
                 SDL_RenderFillRect(renderer, &rect);
+
+                // Desenhe a borda
+                SDL_SetRenderDrawColor(renderer, 2, 2, 112, 255); // Azul escuro rgba(2, 2, 112, 255)
+                SDL_RenderDrawRect(renderer, &rect);
             }
             // Desenhe a haste (|)
             else {
@@ -104,10 +116,13 @@ void to_print_todas_sdl(SDL_Renderer *renderer, Pilha torres[]) {
             }
         }
     }
-
-    // SDL_Delay(400);
+    if (pausa == true){
+        SDL_Delay(400);
+    }
+    
     SDL_DestroyTexture(backgroundTexture);
 }
+
 
 void pilha_to_vetor(Pilha pilha, int* array, int size) {
 
