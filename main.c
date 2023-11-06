@@ -1,19 +1,15 @@
 #include "pilha.h"
 #include "jogo.h"
 
-// Botao que representa as 3 torres
-typedef struct Button{
-    SDL_Rect rect;
-    int index;
-} Button;
+typedef SDL_Rect Button;
 
-// Largura e altura
 #define WIDTH 800
 #define HEIGHT 500
 
-// Imprime os 3 botoes que representam as torres
+// Imprime uma sombra vermelha que representa onde o botao está
 void to_print_botoes(SDL_Renderer *renderer, Button botoes[]);
 
+// free nas torres e inicia novamente
 void resetar_jogo(Pilha pilha[]);
 
 int main(int argc, char *argv[]){
@@ -21,17 +17,10 @@ int main(int argc, char *argv[]){
     // Inicia aleatorio
     srand((unsigned int)time(NULL));
 
-    // Inicia tela
+    // Inicia SDL e cria janela
+    // Cria janela: SDL_CreateWindow(titulo do app, posicao X em relacao ao monitor, posicao Y em relacao ao monitor, largura, altura, comportamento da janela)
     SDL_Init(SDL_INIT_VIDEO);
-
-    // Cria janela
-    SDL_Window *window = SDL_CreateWindow("Torre de Hanoi", // Titulo do aplcativo
-                                        SDL_WINDOWPOS_CENTERED, // Deixa o aplicativo centralizado
-                                        SDL_WINDOWPOS_CENTERED, // Deixa o aplicativo centralizado
-                                        WIDTH, // Largura
-                                        HEIGHT, // Altura
-                                        SDL_WINDOW_SHOWN // Como a janela vai ser exibida
-                                        );
+    SDL_Window *window = SDL_CreateWindow("Torre de Hanoi", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
 
     // Cria render da janela
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -40,52 +29,31 @@ int main(int argc, char *argv[]){
     Pilha pilha[3];
     start_game(pilha);
 
-    // Cria 3 botoes para as pilhas
-    // E cria 3 botoes de opcoes
+    // 3 botoes para torres e 3 para torres
     Button buttons[6];
 
+    // cria os 3 primeiros botoes que sao referentes as torres
     for (int i = 0; i < 3; i++){
-        buttons[i].rect = (SDL_Rect)
-                                    {
-                                     100 + i * 250, // x: horizontal em relacao a borda
-                                     320,           // y: vertical em relacao ao comeco do programa
-                                     100,           // w: largura do retangulo 
-                                     65             // h: altura do retangulo 
-                                     };
-        buttons[i].index = i;
+        buttons[i] = (SDL_Rect){100 + i * 250, // x: horizontal em relacao a borda
+                                320,           // y: vertical em relacao ao comeco do programa
+                                100,           // w: largura do retangulo 
+                                65};           // h: altura do retangulo 
     }
 
-
-    // reiniciar jogo
-    buttons[3].rect = (SDL_Rect){82, 457, 140, 20};
-    buttons[3].index = 3;
-
-    // desistir
-    buttons[4].rect = (SDL_Rect){338, 457, 126, 20};
-    buttons[4].index = 4;
-
-    // fechar jogo
-    buttons[5].rect = (SDL_Rect){568, 457, 178, 20};
-    buttons[5].index = 5;
+    // reiniciar jogo, desistir e fechar jogo
+    buttons[3] = (SDL_Rect){82, 457, 140, 20};
+    buttons[4] = (SDL_Rect){338, 457, 126, 20};
+    buttons[5] = (SDL_Rect){568, 457, 178, 20};
 
     // Variaveis de evento e condição de parada
     SDL_Event evento;
     int parou = false;
 
-    // Variavel que serve para o pop e push
-    int origem;
-    int destino;
-    int temp;
-
-    // Variavel que indica se a torre escolhida é a primeira ou nao
-    int primeiro = true;
-
-    // Contador de jogadas
-    int contador = 0;
+    // Variaveis de pop push, temp e contador de jogadas e indicador de origem/destino
+    int origem, destino, temp, contador = 0, primeiro = true;
 
     // Enquanto não fechar a janela && a terceira torre nao estiver cheia
     while (!parou){
-        
         
         // Esse while depende de eventos, nesse caso são:
         // Se fechar a janela e se ocorrer o clique do mouse
@@ -102,34 +70,35 @@ int main(int argc, char *argv[]){
                 int mouseX, mouseY;
                 SDL_GetMouseState(&mouseX, &mouseY);
 
-                // Verifica se o mouse clicou dentro de alguma torre
+                // Verifica se o mouse clicou dentro de alguma torre ou em alguma opcao
                 for (int i = 0; i < 6; i++) {
-                    if (mouseX >= buttons[i].rect.x && mouseX <= (buttons[i].rect.x + buttons[i].rect.w) &&
-                        mouseY >= buttons[i].rect.y && mouseY <= (buttons[i].rect.y + buttons[i].rect.h)) {
+                    if (mouseX >= buttons[i].x && mouseX <= (buttons[i].x + buttons[i].w) &&
+                        mouseY >= buttons[i].y && mouseY <= (buttons[i].y + buttons[i].h)) {
 
-                        if (buttons[i].index < 3)
-                        {
-                            printf("indice %d\n", buttons[i].index);
-                            temp = buttons[i].index;
+                        if (i < 3){
+                            printf("indice %d\n", i);
+                            temp = i;
                         }
-                        else if (buttons[i].index == 3){ // reiniciar jogo
+                        else if (i == 3){ // reiniciar jogo
                             resetar_jogo(pilha);
                             contador = 0;
+                            primeiro = true;
+                            temp = 3;
+                            SDL_RenderPresent(renderer);
                             continue;
                         }
-                        else if(buttons[i].index == 4){ // desistir
+                        else if(i == 4){ // desistir
                             jogada_aleatoria(renderer, pilha, true);
                             continue;
                         }
-                        else if(buttons[i].index == 5){ // Sair
+                        else if(i == 5){ // Sair
                             parou = true;
                             break;
                         }
                     }
                 }
 
-                if (temp == 0 || temp == 1 || temp == 2)
-                {
+                if (temp == 0 || temp == 1 || temp == 2){
                     if (primeiro){
                         origem = temp;
                         primeiro = false;
@@ -143,7 +112,7 @@ int main(int argc, char *argv[]){
                             contador++; 
                         }
                         system("cls");
-                        printf("jogadas: %d\n", contador);
+                        printf("\njogadas: %d\n", contador);
                     }
                 }
                 
@@ -159,21 +128,20 @@ int main(int argc, char *argv[]){
         SDL_RenderPresent(renderer);
     }
 
-    // Fechar janela e limpar ponteiros
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
-
     // Limpar pilha
     for (int i = 0; i < 3; i++){
         freePilha(&pilha[i]);
     }
 
+    // Fechar janela e limpar ponteiros
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
     return 0;
 }
 
 void resetar_jogo(Pilha pilha[]){
-    // Limpar pilha
     for (int i = 0; i < 3; i++){
         freePilha(&pilha[i]);
     }
@@ -182,11 +150,9 @@ void resetar_jogo(Pilha pilha[]){
 }
 
 void to_print_botoes(SDL_Renderer *renderer, Button botoes[]){
-    for (int i = 0; i < 6; i++)
-    {
-        // Desenha um botao transparente que fica encima da torre
+    for (int i = 0; i < 6; i++){
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 128); 
         SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND); 
-        SDL_RenderFillRect(renderer, &botoes[i].rect);
+        SDL_RenderFillRect(renderer, &botoes[i]);
     }
 }
