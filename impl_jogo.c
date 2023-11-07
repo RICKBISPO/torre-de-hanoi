@@ -27,13 +27,14 @@ void start_buttons(Button buttons[]){
     buttons[5] = (SDL_Rect){568, 457, 178, 20};
 }
 
-void end_game(SDL_Window *window, SDL_Renderer *renderer, Pilha torres[]){
+void end_game(SDL_Window *window, SDL_Renderer *renderer, SDL_Surface* icon, Pilha torres[]){
     // Limpar torres
     for (int i = 0; i < 3; i++){
         freePilha(&torres[i]);
     }
 
     // Fechar janela e limpar ponteiros
+    SDL_FreeSurface(icon);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

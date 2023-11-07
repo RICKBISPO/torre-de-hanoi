@@ -6,7 +6,7 @@ void start_game(Pilha *pilha);
 
 void start_buttons(Button buttons[]);
 
-void end_game(SDL_Window *window, SDL_Renderer *renderer, Pilha torres[]);
+void end_game(SDL_Window *window, SDL_Renderer *renderer, SDL_Surface* icon, Pilha torres[]);
 
 void reset_game(Pilha torres[]);
 

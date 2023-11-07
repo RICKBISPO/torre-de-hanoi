@@ -13,10 +13,13 @@ int main(int argc, char *argv[]){
     // Inicia aleatorio
     srand((unsigned int)time(NULL));
 
+    SDL_Surface* icon = SDL_LoadBMP("assets/icone.bmp");
+
     // Inicia SDL e cria janela
     // Cria janela: SDL_CreateWindow(titulo do app, posicao X em relacao ao monitor, posicao Y em relacao ao monitor, largura, altura, comportamento da janela)
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window *window = SDL_CreateWindow("Torre de Hanoi", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
+    SDL_SetWindowIcon(window, icon);
 
     // Cria render da janela
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -111,7 +114,7 @@ int main(int argc, char *argv[]){
         SDL_RenderPresent(renderer);
     }
 
-    end_game(window, renderer, torres);
+    end_game(window, renderer, icon, torres);
 
     return 0;
 }
