@@ -1,16 +1,12 @@
 #include "pilha.h"
 #include "jogo.h"
 
-typedef SDL_Rect Button;
-
 #define WIDTH 800
 #define HEIGHT 500
 
-// Imprime uma sombra vermelha que representa onde o botao está
-void to_print_botoes(SDL_Renderer *renderer, Button botoes[]);
-
-// free nas torres e inicia novamente
-void resetar_jogo(Pilha pilha[]);
+#define REINICIAR 3
+#define DESISTIR 4
+#define SAIR 5
 
 int main(int argc, char *argv[]){
 
@@ -25,25 +21,12 @@ int main(int argc, char *argv[]){
     // Cria render da janela
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    // Cria um vetor de 3 Pilhas
-    Pilha pilha[3];
-    start_game(pilha);
+    // Cria torres e botoes
+    Pilha torres[3];
+    start_game(torres);
 
-    // 3 botoes para torres e 3 para torres
     Button buttons[6];
-
-    // cria os 3 primeiros botoes que sao referentes as torres
-    for (int i = 0; i < 3; i++){
-        buttons[i] = (SDL_Rect){100 + i * 250, // x: horizontal em relacao a borda
-                                320,           // y: vertical em relacao ao comeco do programa
-                                100,           // w: largura do retangulo 
-                                65};           // h: altura do retangulo 
-    }
-
-    // reiniciar jogo, desistir e fechar jogo
-    buttons[3] = (SDL_Rect){82, 457, 140, 20};
-    buttons[4] = (SDL_Rect){338, 457, 126, 20};
-    buttons[5] = (SDL_Rect){568, 457, 178, 20};
+    start_buttons(buttons);
 
     // Variaveis de evento e condição de parada
     SDL_Event evento;
@@ -79,19 +62,19 @@ int main(int argc, char *argv[]){
                             printf("indice %d\n", i);
                             temp = i;
                         }
-                        else if (i == 3){ // reiniciar jogo
-                            resetar_jogo(pilha);
+                        else if (i == REINICIAR){
+                            reset_game(torres);
                             contador = 0;
                             primeiro = true;
                             temp = 3;
                             SDL_RenderPresent(renderer);
                             continue;
                         }
-                        else if(i == 4){ // desistir
-                            jogada_aleatoria(renderer, pilha, true);
+                        else if(i == DESISTIR){
+                            jogada_aleatoria(renderer, torres, true);
                             continue;
                         }
-                        else if(i == 5){ // Sair
+                        else if(i == SAIR){
                             parou = true;
                             break;
                         }
@@ -107,8 +90,8 @@ int main(int argc, char *argv[]){
                         destino = temp;
                         primeiro = true;
 
-                        if (verifica_acao(pilha[origem], pilha[destino])){
-                            jogada(pilha[origem], pilha[destino]);
+                        if (verifica_acao(torres[origem], torres[destino])){
+                            jogada(torres[origem], torres[destino]);
                             contador++; 
                         }
                         system("cls");
@@ -120,7 +103,7 @@ int main(int argc, char *argv[]){
         }
 
         // exibe as torres e plano de fundo
-        to_print_todas_sdl(renderer, pilha, false);
+        to_print_torres(renderer, torres, false);
     
         // to_print_botoes(renderer, buttons);
 
@@ -128,31 +111,8 @@ int main(int argc, char *argv[]){
         SDL_RenderPresent(renderer);
     }
 
-    // Limpar pilha
-    for (int i = 0; i < 3; i++){
-        freePilha(&pilha[i]);
-    }
-
-    // Fechar janela e limpar ponteiros
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+    end_game(window, renderer, torres);
 
     return 0;
 }
 
-void resetar_jogo(Pilha pilha[]){
-    for (int i = 0; i < 3; i++){
-        freePilha(&pilha[i]);
-    }
-
-    start_game(pilha);
-}
-
-void to_print_botoes(SDL_Renderer *renderer, Button botoes[]){
-    for (int i = 0; i < 6; i++){
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 128); 
-        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND); 
-        SDL_RenderFillRect(renderer, &botoes[i]);
-    }
-}

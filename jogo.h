@@ -1,28 +1,26 @@
 #include "pilha.h"
 
-/**
- * Inicializa o jogo, ou seja, init() em 3 pilhas e
- * enche a ultima pilha com os valores (3,2,1)
- */
+typedef SDL_Rect Button;
+
 void start_game(Pilha *pilha);
 
-/**
- * Funcao que faz uma jogada. Tira de uma torre
- * e coloca em outra
- */
+void start_buttons(Button buttons[]);
+
+void end_game(SDL_Window *window, SDL_Renderer *renderer, Pilha torres[]);
+
+void reset_game(Pilha torres[]);
+
 void jogada(Pilha origem, Pilha destino);
 
-/**
- * Funcao que verifica se é possivel fazer uma jogada:
- * Primeiro verifica se a pilha de origem não está vazia e
- * se a pilha de destino não está cheia
- * Depois compara os topos de cada pilha (topo-origem < topo-destino)
- * Ou se o destino está vazio
- */
 bool verifica_acao(Pilha origem, Pilha destino);
 
-/**
- * Se o jogador desiste, essa função executa vários testes de casos
- * E completa o jogo de onde o usuário terminou
- */
 void jogada_aleatoria(SDL_Renderer *renderer, Pilha pilha[], int pausa);
+
+void to_print_torres(SDL_Renderer *renderer, Pilha torres[], int pausa);
+
+void desenhar_torre(SDL_Renderer *renderer, int x, int y, int largura, int altura, int cores[]);
+
+void pilha_to_vetor(Pilha pilha, int array[]);
+
+// Imprime uma sombra vermelha que representa onde o botao está (apenas para depuracao)
+void to_print_botoes(SDL_Renderer *renderer, Button botoes[]);
