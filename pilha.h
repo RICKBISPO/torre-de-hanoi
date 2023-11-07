@@ -41,3 +41,5 @@ void pilha_to_vetor(Pilha pilha, int* array, int size);
  * Imprime todas as torres usando SDL
 */
 void to_print_todas_sdl(SDL_Renderer *renderer, Pilha torres[], int pausa);
+
+void desenhar_torre(SDL_Renderer *renderer, int x, int y, int largura, int altura, int cores[]);
