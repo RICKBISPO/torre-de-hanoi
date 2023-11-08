@@ -1,6 +1,7 @@
 # Torre de Hanoi
 
-![image](https://github.com/edenilsonjunior/torre-de-hanoi/assets/110670578/767ef041-8152-43de-a902-af9de39a7b5c)
+![image](https://github.com/edenilsonjunior/torre-de-hanoi/assets/110670578/eeefade5-0247-44e2-bccb-bc7847eee918)
+
 
 
 Projeto desenvolvido como parte da disciplina de Estrutura de Dados do curso de Sistemas para Internet no IFSP, Campus Araraquara.
