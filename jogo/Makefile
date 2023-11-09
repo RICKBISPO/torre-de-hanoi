@@ -5,7 +5,7 @@ LDFLAGS = -L./SDL2/i686-w64-mingw32/lib
 LDLIBS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
 
 # Arquivos fonte
-SRCS = main.c impl_jogo.c impl_pilha.c
+SRCS = main.c jogo_impl.c pilha_impl.c
 OBJS = $(SRCS:.c=.o)
 
 # Nome do executável

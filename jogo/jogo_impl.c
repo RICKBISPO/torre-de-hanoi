@@ -274,8 +274,7 @@ void to_print_torres(SDL_Renderer *renderer, Pilha torres[], int pausa) {
 }
 
 void desenhar_torre(SDL_Renderer *renderer, int x, int y, int largura, int altura, int cores[]){
-
-
+    
     SDL_SetRenderDrawColor(renderer, cores[0], cores[1], cores[2], cores[3]); 
     SDL_Rect rect = {
                     x - largura/2,      // posicao horizontal do disco (- largura/2 para ficar centralizado)
