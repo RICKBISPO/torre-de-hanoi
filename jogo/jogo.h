@@ -1,4 +1,17 @@
 #include "pilha.h"
+#include <time.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <string.h>
+
+#ifdef _WIN32
+#include <windows.h>
+#define CLEAR_SCREEN "cls"
+#else
+#include <unistd.h>
+#define CLEAR_SCREEN "clear"
+#endif
+
 
 /**
  * Constantes que definem o indice de cada disco

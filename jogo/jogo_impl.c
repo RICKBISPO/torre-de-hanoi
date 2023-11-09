@@ -133,20 +133,22 @@ void jogada_aleatoria(SDL_Renderer *renderer, Pilha torres[], int pausa){
     
     while (!is_full(torres[TORRE_3])){
 
-        origem = rand() % 3;
-        destino = rand() % 3;
-
         // Se a torre 1 ou 2 estiverem cheias, aplica-se o gabarito de 7 passos
         if (is_full(torres[TORRE_1]) || is_full(torres[TORRE_2])){
             gabarito_torre(renderer, torres, pausa);
         }
+        else if (!is_full(torres[TORRE_3]))
+        {
+            origem = rand() % 3;
+            destino = rand() % 3;
 
-        // funcao que diminui o numero de jogadas aleatorias por meio de algumas verificacoes
-        diminuir_jogadas(t1, t2, t3, &origem, &destino);
+            // funcao que diminui o numero de jogadas aleatorias por meio de algumas verificacoes
+            diminuir_jogadas(t1, t2, t3, &origem, &destino);
 
-        if (fazer_jogada(torres[origem], torres[destino]) && !is_full(torres[TORRE_3])){
-            to_print_torres(renderer, torres, pausa);
-            SDL_RenderPresent(renderer);
+            if (fazer_jogada(torres[origem], torres[destino]) && !is_full(torres[TORRE_3])){
+                to_print_torres(renderer, torres, pausa);
+                SDL_RenderPresent(renderer);
+            }
         }
     }
 }

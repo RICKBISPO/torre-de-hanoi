@@ -1,18 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <time.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <string.h>
-
-#ifdef _WIN32
-#include <windows.h>
-#define CLEAR_SCREEN "cls"
-#else
-#include <unistd.h>
-#define CLEAR_SCREEN "clear"
-#endif
 
 #define MAX_STACK_SIZE 3
 
