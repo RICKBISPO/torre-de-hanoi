@@ -5,7 +5,7 @@ LDFLAGS = -L./SDL2/i686-w64-mingw32/lib
 LDLIBS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
 
 # Arquivos fonte
-SRCS = src/main.c src/jogo_impl.c src/pilha_impl.c
+SRCS := $(wildcard src/*.c)
 OBJS = $(SRCS:.c=.o)
 
 # Nome do executável
@@ -20,6 +20,10 @@ $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 # Limpar arquivos .o e o executável ao compilar
-.PHONY: clean
+.PHONY: all
+all: clean
+
 clean:
-	del /Q $(OBJS) $(TARGET)
+	del /Q $(OBJS)
+
+.PHONY: clean

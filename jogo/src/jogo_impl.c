@@ -369,7 +369,7 @@ void exibir_contador(Game jogo){
     SDL_Color textColor = {255, 255, 255}; // branco
 
     char texto[30];
-    snprintf(texto, 30, "%d movimentos", jogo->contador);
+    snprintf(texto, 30, "%d", jogo->contador);
 
     SDL_Surface *textSurface = TTF_RenderText_Solid(jogo->font, texto, textColor);
     SDL_Texture *textTexture = SDL_CreateTextureFromSurface(jogo->renderer, textSurface);

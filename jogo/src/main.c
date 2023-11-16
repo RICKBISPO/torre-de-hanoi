@@ -4,6 +4,8 @@ int main(int argc, char *argv[]){
 
     srand((unsigned int)time(NULL));
 
+    SDL_Init(SDL_INIT_EVERYTHING);
+    
     Game jogo = iniciar_jogo();
 
     SDL_Event evento;
