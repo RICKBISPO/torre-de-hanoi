@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "pilha.h": "c",
+        "time.h": "c",
+        "jogo.h": "c",
+        "sdl_image.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}

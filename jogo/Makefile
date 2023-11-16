@@ -2,10 +2,10 @@
 CC = gcc
 CFLAGS = -I./SDL2/i686-w64-mingw32/include
 LDFLAGS = -L./SDL2/i686-w64-mingw32/lib
-LDLIBS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
+LDLIBS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
 
 # Arquivos fonte
-SRCS = main.c jogo_impl.c pilha_impl.c
+SRCS = src/main.c src/jogo_impl.c src/pilha_impl.c
 OBJS = $(SRCS:.c=.o)
 
 # Nome do executável
@@ -20,10 +20,6 @@ $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 # Limpar arquivos .o e o executável ao compilar
-.PHONY: all
-all: clean
-
-clean:
-	del /Q $(OBJS)
-
 .PHONY: clean
+clean:
+	del /Q $(OBJS) $(TARGET)
