@@ -14,6 +14,10 @@
 #define CLEAR_SCREEN "clear"
 #endif
 
+#define STATUS_JOGANDO 0
+#define STATUS_DESISTIU -1
+#define STATUS_GANHOU 1
+
 /* Constantes que definem o indice de cada disco */
 #define PRIMEIRO_DISCO 0
 #define SEGUNDO_DISCO 1
@@ -52,7 +56,7 @@ struct jogo{
     Button buttons[NRO_BUTTONS];
     SDL_Event evento;
     int contador;
-    int desistiu;
+    int status;
     int primeiro;
     int origem;
     int destino;

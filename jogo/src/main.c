@@ -4,8 +4,6 @@ int main(int argc, char *argv[]){
 
     srand((unsigned int)time(NULL));
 
-    SDL_Init(SDL_INIT_EVERYTHING);
-    
     Game jogo = iniciar_jogo();
 
     SDL_Event evento;
@@ -17,6 +15,12 @@ int main(int argc, char *argv[]){
             if (evento.type == SDL_QUIT){
                 parou = true;
             }
+
+            // Se o jogo acabou e o usuario ganhou, exibe o background de vencedor            
+            if(is_full(jogo->torres[TORRE_3]) && (jogo->status == STATUS_JOGANDO)){
+                jogo->status = STATUS_GANHOU;
+            }
+
             else if (evento.type == SDL_MOUSEBUTTONDOWN){
 
                 // Acha o indice do botao que foi clicado
@@ -32,6 +36,10 @@ int main(int argc, char *argv[]){
                 else if (temp == SAIR) parou = true;
             }
         }
+
+        // exibir_musica(jogo);
+        // verifica pelo jogo->status e troca a musica
+
         exibir_torres(jogo);
         exibir_contador(jogo);
         // exibir_botoes(jogo);

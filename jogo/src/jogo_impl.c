@@ -1,6 +1,9 @@
 #include "../include/jogo.h"
 
 Game iniciar_jogo(){
+
+    SDL_Init(SDL_INIT_EVERYTHING);
+
     Game jogo = malloc(sizeof(struct jogo));
     
     // Cria janela e renderizador
@@ -23,7 +26,7 @@ Game iniciar_jogo(){
 
     // zera o contador
     jogo->contador = 0;
-    jogo->desistiu = false;
+    jogo->status = STATUS_JOGANDO;
     jogo->primeiro = true;
 
     return jogo;
@@ -77,7 +80,7 @@ void reset_game(Game jogo){
 
     jogo->contador = 0;
     jogo->primeiro = true;
-    jogo->desistiu = false;
+    jogo->status = STATUS_JOGANDO;
     system(CLEAR_SCREEN);
     printf("\njogadas: %d\n", jogo->contador);
 }
@@ -147,7 +150,7 @@ bool fazer_jogada(Pilha origem, Pilha destino){
 
 void jogada_aleatoria(Game jogo){
 
-    jogo->desistiu = true;
+    jogo->status = STATUS_DESISTIU;
 
     while (!is_full(jogo->torres[TORRE_3])){
 
@@ -272,14 +275,19 @@ void exibir_torres(Game jogo) {
 
     SDL_Texture *backgroundTexture;
 
-    if (jogo->desistiu == true){
-        backgroundTexture = IMG_LoadTexture(jogo->renderer, "assets/images/att.png");
-        SDL_RenderCopy(jogo->renderer, backgroundTexture, NULL, NULL);
-    }else{
-        backgroundTexture = IMG_LoadTexture(jogo->renderer, "assets/images/att.png");
+    if (jogo->status == STATUS_JOGANDO){
+        backgroundTexture = IMG_LoadTexture(jogo->renderer, "assets/images/default.png");
         SDL_RenderCopy(jogo->renderer, backgroundTexture, NULL, NULL);
     }
-    
+    else if (jogo->status == STATUS_GANHOU){
+        backgroundTexture = IMG_LoadTexture(jogo->renderer, "assets/images/win.gif");
+        SDL_RenderCopy(jogo->renderer, backgroundTexture, NULL, NULL);
+    }  
+    else if (jogo->status == STATUS_DESISTIU){
+        backgroundTexture = IMG_LoadTexture(jogo->renderer, "assets/images/game_over.png");
+        SDL_RenderCopy(jogo->renderer, backgroundTexture, NULL, NULL);
+    }
+
     int x_base = 150;
     int y_base = 370;
     int espacamento = 250; 
@@ -342,7 +350,7 @@ void exibir_torres(Game jogo) {
         free_pilha(&pilha_temp);
     }
 
-    if (jogo->desistiu == true) {
+    if (jogo->status == STATUS_DESISTIU) {
         SDL_Delay(400);
     }
     SDL_DestroyTexture(backgroundTexture);
