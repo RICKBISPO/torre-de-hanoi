@@ -55,3 +55,72 @@ void free_pilha(Pilha* pilha){
         *pilha = NULL; 
     }
 }
+
+// IMPLEMENTACAO DE PILHA USANDO LISTA SIMPLESMENTE ENCADEADA
+// #include "../include/pilha.h"
+
+// typedef struct node* Node;
+
+// struct node{
+// 	Tipo_Informacao info;
+// 	Node next;
+// };
+
+// struct stack{
+// 	Node topo;
+// 	int total;
+// };
+
+// void init(Pilha* pilha){
+// 	*pilha = malloc(sizeof(struct stack));
+// 	(*pilha)->topo = NULL;
+// 	(*pilha)->total = 0;
+// }
+
+// bool is_full(Pilha pilha){
+// 	return pilha->total == MAX_STACK_SIZE;
+// }
+
+// bool is_empty(Pilha pilha){
+// 	return pilha->topo == NULL;
+// }
+
+// bool push(Pilha pilha, Tipo_Informacao elemento){
+// 	if (pilha != NULL){
+		
+// 		Node novo = malloc(sizeof(struct node));
+// 		novo->info = elemento;
+
+// 		novo->next = pilha->topo;
+// 		pilha->topo = novo;
+
+// 		pilha->total += 1;
+// 		return true;
+// 	}
+// 	return false;
+// }
+
+// bool pop(Pilha pilha, Tipo_Informacao* elemento){
+// 	if (pilha != NULL){
+// 		if (!is_empty(pilha)){
+			
+// 			Node rip = pilha->topo;
+// 			*elemento = rip->info;
+
+// 			pilha->topo = rip->next;
+			
+// 			free(rip);
+
+// 			pilha->total -= 1;
+// 			return true;
+// 		}
+// 	}
+// 	return false;
+// }
+
+// void free_pilha(Pilha* pilha){
+//     if (*pilha != NULL) {
+//         free(*pilha);
+//         *pilha = NULL; 
+//     }
+// }
