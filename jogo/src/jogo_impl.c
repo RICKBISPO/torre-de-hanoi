@@ -26,7 +26,7 @@ Game iniciar_jogo(){
 
     // zera o contador
     jogo->contador = 0;
-    jogo->status = STATUS_JOGANDO;
+    jogo->status = JOGANDO;
     jogo->primeiro = true;
 
     return jogo;
@@ -80,7 +80,7 @@ void reset_game(Game jogo){
 
     jogo->contador = 0;
     jogo->primeiro = true;
-    jogo->status = STATUS_JOGANDO;
+    jogo->status = JOGANDO;
     system(CLEAR_SCREEN);
     printf("\njogadas: %d\n", jogo->contador);
 }
@@ -150,7 +150,7 @@ bool fazer_jogada(Pilha origem, Pilha destino){
 
 void jogada_aleatoria(Game jogo){
 
-    jogo->status = STATUS_DESISTIU;
+    jogo->status = PERDEU;
 
     while (!is_full(jogo->torres[TORRE_3])){
 
@@ -275,15 +275,15 @@ void exibir_torres(Game jogo) {
 
     SDL_Texture *backgroundTexture;
 
-    if (jogo->status == STATUS_JOGANDO){
+    if (jogo->status == JOGANDO){
         backgroundTexture = IMG_LoadTexture(jogo->renderer, "assets/images/default.png");
         SDL_RenderCopy(jogo->renderer, backgroundTexture, NULL, NULL);
     }
-    else if (jogo->status == STATUS_GANHOU){
+    else if (jogo->status == GANHOU){
         backgroundTexture = IMG_LoadTexture(jogo->renderer, "assets/images/win.gif");
         SDL_RenderCopy(jogo->renderer, backgroundTexture, NULL, NULL);
     }  
-    else if (jogo->status == STATUS_DESISTIU){
+    else if (jogo->status == PERDEU){
         backgroundTexture = IMG_LoadTexture(jogo->renderer, "assets/images/game_over.png");
         SDL_RenderCopy(jogo->renderer, backgroundTexture, NULL, NULL);
     }
@@ -350,7 +350,7 @@ void exibir_torres(Game jogo) {
         free_pilha(&pilha_temp);
     }
 
-    if (jogo->status == STATUS_DESISTIU) {
+    if (jogo->status == PERDEU) {
         SDL_Delay(400);
     }
     SDL_DestroyTexture(backgroundTexture);

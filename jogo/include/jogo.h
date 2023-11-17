@@ -14,9 +14,9 @@
 #define CLEAR_SCREEN "clear"
 #endif
 
-#define STATUS_JOGANDO 0
-#define STATUS_DESISTIU -1
-#define STATUS_GANHOU 1
+#define JOGANDO 0
+#define PERDEU -1
+#define GANHOU 1
 
 /* Constantes que definem o indice de cada disco */
 #define PRIMEIRO_DISCO 0

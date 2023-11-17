@@ -17,8 +17,8 @@ int main(int argc, char *argv[]){
             }
 
             // Se o jogo acabou e o usuario ganhou, exibe o background de vencedor            
-            if(is_full(jogo->torres[TORRE_3]) && (jogo->status == STATUS_JOGANDO)){
-                jogo->status = STATUS_GANHOU;
+            if(is_full(jogo->torres[TORRE_3]) && (jogo->status == JOGANDO)){
+                jogo->status = GANHOU;
             }
 
             else if (evento.type == SDL_MOUSEBUTTONDOWN){
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]){
 
         // exibir_musica(jogo);
         // verifica pelo jogo->status e troca a musica
-
+        
         exibir_torres(jogo);
         exibir_contador(jogo);
         // exibir_botoes(jogo);
