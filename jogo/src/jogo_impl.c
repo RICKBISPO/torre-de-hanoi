@@ -280,7 +280,7 @@ void exibir_torres(Game jogo) {
         SDL_RenderCopy(jogo->renderer, backgroundTexture, NULL, NULL);
     }
     else if (jogo->status == GANHOU){
-        backgroundTexture = IMG_LoadTexture(jogo->renderer, "assets/images/win.gif");
+        backgroundTexture = IMG_LoadTexture(jogo->renderer, "assets/images/win.png");
         SDL_RenderCopy(jogo->renderer, backgroundTexture, NULL, NULL);
     }  
     else if (jogo->status == PERDEU){
