@@ -148,7 +148,7 @@ bool fazer_jogada(Pilha origem, Pilha destino){
     return false;
 }
 
-void jogada_aleatoria(Game jogo){
+void resolver_jogo(Game jogo){
 
     jogo->status = PERDEU;
 

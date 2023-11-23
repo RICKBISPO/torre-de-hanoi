@@ -80,7 +80,7 @@ void jogada(Game jogo, int temp);
 
 bool fazer_jogada(Pilha origem, Pilha destino);
 
-void jogada_aleatoria(Game jogo);
+void resolver_jogo(Game jogo);
 
 void gabarito_torre(Game jogo);
 

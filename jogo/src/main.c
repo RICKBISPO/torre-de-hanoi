@@ -16,30 +16,27 @@ int main(int argc, char *argv[]){
                 parou = true;
             }
 
-            // Se o jogo acabou e o usuario ganhou, exibe o background de vencedor            
-            if(is_full(jogo->torres[TORRE_3]) && (jogo->status == JOGANDO)){
-                jogo->status = GANHOU;
-            }
-
             else if (evento.type == SDL_MOUSEBUTTONDOWN){
 
                 // Acha o indice do botao que foi clicado
                 int temp = descobrir_click(jogo);
 
                 // Faz uma jogada se o indice for entre 0 e 2
-                if (temp >= 0 && temp < 3) jogada(jogo, temp);
+                if (temp == TORRE_1 || temp == TORRE_2 || temp == TORRE_3) jogada(jogo, temp);
                 
                 else if (temp == REINICIAR) reset_game(jogo);
                 
-                else if (temp == DESISTIR) jogada_aleatoria(jogo);
+                else if (temp == DESISTIR) resolver_jogo(jogo);
                 
                 else if (temp == SAIR) parou = true;
             }
         }
 
-        // exibir_musica(jogo);
-        // verifica pelo jogo->status e troca a musica
-        
+        // Se o jogo acabou e o usuario ganhou, exibe o background de vencedor            
+        if(is_full(jogo->torres[TORRE_3]) && (jogo->status == JOGANDO)){
+            jogo->status = GANHOU;
+        }
+
         exibir_torres(jogo);
         exibir_contador(jogo);
         // exibir_botoes(jogo);
