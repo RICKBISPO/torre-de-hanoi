@@ -35,7 +35,7 @@ Navegue até a pasta do projeto e execute esse comando no terminal:
 
 Para windows:
 ```bash
-gcc main.c jogo_impl.c pilha_impl.c -o programa.exe -I .\SDL2\i686-w64-mingw32\include -L .\SDL2\i686-w64-mingw32\lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
+gcc main.c jogo_impl.c pilha_impl.c -o programa.exe -I .\SDL2\i686-w64-mingw32\include -L .\SDL2\i686-w64-mingw32\lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
 ```
 
 ### 3. Executar o programa compilado
