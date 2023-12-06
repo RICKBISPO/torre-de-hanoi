@@ -21,7 +21,9 @@ O projeto foi desenvolvido como parte da disciplina de Estrutura de Dados do cur
 
 ## Como Compilar
 
-Para compilar e rodar o projeto, siga as etapas:
+Certifique-se de ter o mingw32 instalado no computador.
+
+Para compilar e rodar o projeto no windows, siga as etapas:
 
 ### 1. Clonar o repositório
 
@@ -31,18 +33,16 @@ git clone https://github.com/edenilsonjunior/torre-de-hanoi.git
 
 ### 2. Abra o terminal na pasta onde foi clonado o repositório
 
-Navegue até a pasta do projeto e execute esse comando no terminal:
+Navegue até a pasta do projeto onde tem o arquivo Makefile e execute esse comando no terminal:
 
-Para windows:
 ```bash
-gcc main.c jogo_impl.c pilha_impl.c -o programa.exe -I .\SDL2\i686-w64-mingw32\include -L .\SDL2\i686-w64-mingw32\lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
+mingw32-make
 ```
 
 ### 3. Executar o programa compilado
 
-Após ter compilado o projeto seguindo as instruções acima, execute o projeto digitando:
+Após ter compilado o projeto, execute o projeto digitando:
 
-Para windows:
 ```bash
-./programa
+.\programa.exe
 ```
