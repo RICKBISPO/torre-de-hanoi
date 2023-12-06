@@ -14,6 +14,7 @@
 #define CLEAR_SCREEN "clear"
 #endif
 
+/* Constantes que definem o estado do jogo */
 #define JOGANDO 0
 #define PERDEU -1
 #define GANHOU 1

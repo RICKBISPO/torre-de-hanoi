@@ -275,6 +275,7 @@ void exibir_torres(Game jogo) {
 
     SDL_Texture *backgroundTexture;
 
+    // Desenha o background
     if (jogo->status == JOGANDO){
         backgroundTexture = IMG_LoadTexture(jogo->renderer, "assets/images/default.png");
         SDL_RenderCopy(jogo->renderer, backgroundTexture, NULL, NULL);
