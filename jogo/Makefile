@@ -24,6 +24,6 @@ $(TARGET): $(OBJS)
 all: clean
 
 clean:
-	del /Q $(OBJS)
+	cmd /C del /Q $(subst /,\,$(OBJS))
 
 .PHONY: clean
