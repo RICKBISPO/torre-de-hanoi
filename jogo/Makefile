@@ -1,7 +1,7 @@
 # Variáveis de compilação
 CC = gcc
-CFLAGS = -I./SDL2/i686-w64-mingw32/include
-LDFLAGS = -L./SDL2/i686-w64-mingw32/lib
+CFLAGS = -I./SDL2/include
+LDFLAGS = -L./SDL2/lib
 LDLIBS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
 
 # Arquivos fonte
