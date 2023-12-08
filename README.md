@@ -36,7 +36,7 @@ https://github.com/edenilsonjunior/torre-de-hanoi/assets/85528622/b5e4041a-e269-
 ### Caso Desistiu
 
 
-![image](https://github.com/edenilsonjunior/torre-de-hanoi/assets/85528622/b247a6a5-8074-4e96-821b-e4d2fd900d28)
+https://github.com/edenilsonjunior/torre-de-hanoi/assets/85528622/d5eeb377-615a-4a84-8199-63011e5b490b
 
 
 ## Como Compilar
