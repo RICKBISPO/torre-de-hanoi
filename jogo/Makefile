@@ -9,21 +9,37 @@ SRCS := $(wildcard src/*.c)
 OBJS = $(SRCS:.c=.o)
 
 # Nome do executável
-TARGET = programa.exe
+ifeq ($(OS),Windows_NT)
+	TARGET = programa.exe
+else
+	TARGET = programa
+endif
 
-all: $(TARGET)
+# Detectar o sistema operativo
+ifeq ($(OS),Windows_NT)
+	detected_OS := Windows
+else
+	detected_OS := $(shell uname -s)
+endif
 
-$(TARGET): $(OBJS)
-	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+# Regras para Linux e Windows
+linux: $(OBJS)
+	$(CC) -o $(TARGET) $(OBJS) $(LDLIBS)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
+linux-libs:
+	sudo apt-get update
+	sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev
+
+windows:
+	gcc -o $(TARGET) $(SRCS) -I ./SDL2/include -L ./SDL2/lib/ -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
 
 # Limpar arquivos .o e o executável ao compilar
-.PHONY: all
-all: clean
-
-clean:
-	cmd /C del /Q $(subst /,\,$(OBJS))
-
 .PHONY: clean
+clean:
+ifeq ($(detected_OS),Windows)
+	cmd /C del /Q $(subst /,\,$(OBJS))
+else
+	rm -f $(OBJS)
+endif
+
+.PHONY: clean linux-libs linux windows

@@ -19,27 +19,54 @@ O projeto foi desenvolvido como parte da disciplina de Estrutura de Dados do cur
 
 É o jogo Torre de Hanoi implementado em C. Ele faz uso de um tipo abstrato de dados, Pilha, onde o jogador pode fazer suas jogadas. Além disso, caso o jogador deseje desistir, o computador é capaz de completar o jogo por ele.
 
-## Como Compilar
+## Lógica do jogo
 
-Certifique-se de ter o mingw32 instalado no computador.
+O jogo utiliza a lógica de LIFO (Last in, First Out), ou pilha, na qual o conceito é que: O primeiro disco a ser colocado será o último a ser retirado.
 
-Para compilar e rodar o projeto no windows, siga as etapas:
+## Como Compilar e jogar
 
-### 1. Clonar o repositório
+Clone o repositório para algum lugar de sua preferência e siga as instruções:
 
 ```bash
 git clone https://github.com/edenilsonjunior/torre-de-hanoi.git
 ```
 
-### 2. Abra o terminal na pasta onde foi clonado o repositório
+### Linux
+Para compilar e rodar o projeto no Linux, siga as etapas:
 
-Navegue até a pasta do projeto onde tem o arquivo Makefile e execute esse comando no terminal:
+#### 1. Abra o terminal na pasta onde foi clonado o repositório
 
+Digite esse comando para baixar as dependências do jogo:
 ```bash
-mingw32-make
+make linux-libs
 ```
 
-### 3. Executar o programa compilado
+Após ter baixado as dependências, execute esse comando para compilar:
+```bash
+make linux
+```
+
+#### 2. Executar o programa compilado
+
+Após ter compilado o projeto, execute o projeto digitando:
+
+```bash
+.\programa
+```
+
+
+### Windows
+Para compilar e rodar o projeto no Windows, siga as etapas:
+
+#### 1. Abra o terminal na pasta onde foi clonado o repositório
+
+Execute esse comando para compilar:
+
+```bash
+mingw32-make windows
+```
+
+#### 2. Executar o programa compilado
 
 Após ter compilado o projeto, execute o projeto digitando:
 
