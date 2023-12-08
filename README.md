@@ -19,11 +19,15 @@ O projeto foi desenvolvido como parte da disciplina de Estrutura de Dados do cur
 
 É o jogo Torre de Hanoi implementado em C. Ele faz uso de um tipo abstrato de dados, Pilha, onde o jogador pode fazer suas jogadas. Além disso, caso o jogador deseje desistir, o computador é capaz de completar o jogo por ele.
 
-## Lógica do jogo
+## Lógica do Jogo
 
 O jogo utiliza a lógica de LIFO (Last in, First Out), ou pilha, na qual o conceito é que: O primeiro disco a ser colocado será o último a ser retirado.
 
-## Como Compilar e jogar
+## Como Jogar
+
+A Torre de Hanói é um quebra-cabeça com três hastes e discos de diferentes tamanhos. O objetivo é mover a pilha original da primeira haste (1) para a última haste (3), obedecendo à regra de que discos maiores não podem ficar sobre discos menores. Para jogar, basta selecionar com um clique a torre de onde deseja retirar o disco e, em seguida, com um clique, escolher a torre para a qual deseja posicionar o disco. O jogador vence quando a última torre está completa, e perde ao selecionar a opção de desistência.
+
+## Como Compilar
 
 Clone o repositório para algum lugar de sua preferência e siga as instruções:
 
