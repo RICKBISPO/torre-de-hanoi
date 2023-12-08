@@ -29,13 +29,14 @@ A Torre de Hanói é um quebra-cabeça com três hastes e discos de diferentes t
 
 ### Caso Venceu
 
-![image](https://github.com/edenilsonjunior/torre-de-hanoi/assets/85528622/b247a6a5-8074-4e96-821b-e4d2fd900d28)
+
+https://github.com/edenilsonjunior/torre-de-hanoi/assets/85528622/b5e4041a-e269-446f-8346-0e91397bb1f8
+
 
 ### Caso Desistiu
 
 
-
-https://github.com/edenilsonjunior/torre-de-hanoi/assets/85528622/9b1cb1aa-8e6a-4918-8624-5f15094a167e
+![image](https://github.com/edenilsonjunior/torre-de-hanoi/assets/85528622/b247a6a5-8074-4e96-821b-e4d2fd900d28)
 
 
 ## Como Compilar
