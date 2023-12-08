@@ -93,31 +93,31 @@ Após ter compilado o projeto, execute o projeto digitando:
 
 ## Metodologia de Desenvolvimento
 
-#### Escolha do Jogo
+#### 1. Escolha do Jogo
 O grupo realizou uma decisão conjunta para escolher o tipo de jogo a ser desenvolvido.
 
-#### Análise Preliminar
+#### 2. Análise Preliminar
 Foi conduzida uma análise detalhada utilizando técnicas de brainstorming para determinar os elementos essenciais do jogo.
 
-#### Definição de TADs e Métodos
+#### 3. Definição de TADs e Métodos
 Com base na análise, foram definidos os Tipos Abstratos de Dados (TADs) e os métodos que seriam implementados.
 
-#### Organização do Projeto
+#### 4. Organização do Projeto
 A estrutura do jogo foi organizada, e a biblioteca SDL2 foi escolhida para atender aos requisitos do projeto.
 
-#### Divisão de Responsabilidades
+#### 5. Divisão de Responsabilidades
 A equipe dividiu-se em dois grupos, atribuindo duas pessoas para a parte gráfica (front-end) e outras duas para a parte lógica (back-end).
 
-#### Implementação
+#### 6. Implementação
 A parte lógica do jogo foi desenvolvida em linguagem C, enquanto a parte gráfica foi construída utilizando a biblioteca SDL2.
 
-#### Gerenciamento de Interdependências
+#### 7. Gerenciamento de Interdependências
 O relacionamento entre as partes lógica e gráfica apresentou desafios, mas a equipe superou-os por meio de comunicação eficiente e colaboração constante.
 
-#### Boas Práticas de Programação
+#### 9. Boas Práticas de Programação
 Foram implementadas boas práticas de programação para garantir uma clara divisão de responsabilidades no código, contribuindo para a manutenibilidade e compreensão eficaz do sistema.
 
-#### Conclusão do Projeto
+#### 10. Conclusão do Projeto
 Ao final do desenvolvimento, foram adicionados elementos gráficos finais para aprimorar a estética e completar a integração do projeto. O resultado foi um produto funcional que atendeu aos objetivos estabelecidos.
 
 Este arquivo .readme fornece uma visão geral do processo de desenvolvimento do jogo, desde a escolha inicial até a conclusão bem-sucedida do projeto.
