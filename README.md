@@ -41,6 +41,12 @@ Digite esse comando para baixar as dependências do jogo:
 make linux-libs
 ```
 
+Caso não funcione, abra um terminal e digite esses dois comandos:
+```bash
+sudo apt-get update
+sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev
+```
+
 Após ter baixado as dependências, execute esse comando para compilar:
 ```bash
 make linux
@@ -51,7 +57,7 @@ make linux
 Após ter compilado o projeto, execute o projeto digitando:
 
 ```bash
-.\programa
+./programa
 ```
 
 
