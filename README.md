@@ -27,6 +27,13 @@ O jogo utiliza a lógica de LIFO (Last in, First Out), ou pilha, na qual o conce
 
 A Torre de Hanói é um quebra-cabeça com três hastes e discos de diferentes tamanhos. O objetivo é mover a pilha original da primeira haste (1) para a última haste (3), obedecendo à regra de que discos maiores não podem ficar sobre discos menores. Para jogar, basta selecionar com um clique a torre de onde deseja retirar o disco e, em seguida, com um clique, escolher a torre para a qual deseja posicionar o disco. O jogador vence quando a última torre está completa, e perde ao selecionar a opção de desistência.
 
+#### Caso Venceu
+
+![image](https://github.com/edenilsonjunior/torre-de-hanoi/assets/85528622/b247a6a5-8074-4e96-821b-e4d2fd900d28)
+
+#### Caso Desistiu
+
+
 ## Como Compilar
 
 Clone o repositório para algum lugar de sua preferência e siga as instruções:
