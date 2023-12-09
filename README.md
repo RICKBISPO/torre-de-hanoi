@@ -2,16 +2,16 @@
 
 ![image](https://github.com/edenilsonjunior/torre-de-hanoi/assets/110670578/eeefade5-0247-44e2-bccb-bc7847eee918)
 
-
-
 Projeto desenvolvido como parte da disciplina de Estrutura de Dados do curso de Sistemas para Internet no IFSP, Campus Araraquara.
 
-## Integrantes
 
-- Edenilson Silva Garcia Junior
-- Endrew Gomes da Silva
-- Gabriel Roberts Silva Soares
-- Henrique Ferreira Bispo
+## Integrantes 
+
+- [Edenilson Garcia](https://github.com/edenilsonjunior)
+- [Endrew Gomes](https://github.com/EndrewGomess)
+- [Gabriel Roberts](https://github.com/roberttiss)
+- [Henrique Bispo](https://github.com/RICKBISPO)
+
 
 ## Descrição
 
@@ -133,3 +133,7 @@ Bibliotecas utilizadas (Parte gráfica):
 
 #### 7. Conclusão do Projeto
 Ao final do desenvolvimento, foram adicionados elementos gráficos finais para melhorar a jogabilidade, além da documentação do código e criação do README. 
+
+## Link para o vídeo com a explicação da lógica do jogo
+
+- [Lógica do jogo](https://youtu.be/31gSpLp_tU0)
