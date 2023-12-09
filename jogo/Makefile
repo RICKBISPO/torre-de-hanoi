@@ -2,7 +2,7 @@
 CC = gcc
 CFLAGS = -I./SDL2/include
 LDFLAGS = -L./SDL2/lib
-LDLIBS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
+LDLIBS = -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
 
 # Arquivos fonte
 SRCS := $(wildcard src/*.c)
