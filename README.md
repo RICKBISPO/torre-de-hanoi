@@ -81,7 +81,12 @@ Para compilar e rodar o projeto no Windows, siga as etapas:
 
 #### 1. Abra o terminal na pasta onde foi clonado o repositório
 
-Execute esse comando para compilar:
+Digite esse comando para baixar as dependências do jogo:
+```bash
+make windows-libs
+```
+
+Após ter baixado as dependências, execute esse comando para compilar:
 
 ```bash
 mingw32-make windows
@@ -95,31 +100,7 @@ Após ter compilado o projeto, execute o projeto digitando:
 .\programa.exe
 ```
 
-## Metodologia de Desenvolvimento
-
-#### 1. Escolha do Jogo
-O grupo realizou uma decisão conjunta para escolher o tipo de jogo a ser desenvolvido. Que nesse caso foi o jogo Torre de Hanoi, por já ter sido tema de estudo no passado em aulas de lógica e por ser um jogo didático, no qual o usuário pode treinar seu raciocínio lógico e se divertir ao mesmo tempo.
-
-#### 2. Análise Preliminar
-Foi feita uma reunião entre os integrantes para discutir e determinar os elementos do jogo.
-
-#### 3. Definição de TADs e Métodos
-Com base nessa reunião, foi definido que o melhor TAD a ser utilizado seria o de Pilha.
-
-#### 4. Organização do Projeto
-A estrutura do jogo foi organizada, e a biblioteca SDL2 foi escolhida para atender aos requisitos do projeto.
-
-O projeto esta dividido em arquivos de implementação e arquivos de biblioteca, foram elaborados 3 arquivos de implementação:
-
-- pilha_impl.c - Implementação do TAD pilha e suas funções.
-- jogo_impl.c - Implementação das funções do jogo. 
-- main.c - Cria um novo novo jogo e chama as funções de acordo com o que o usuário clicou. 
-
-#### 5. Divisão de Responsabilidades
-A equipe dividiu-se em dois grupos, atribuindo duas pessoas para a parte gráfica (front-end) e outras duas para a parte lógica (back-end).
-
-#### 6. Implementação
-Foi utilizado duas tecnologias para o jogo:
+## Tecnologias Utilizadas
 
 Linguagem de programação:
 - C
@@ -129,11 +110,3 @@ Bibliotecas utilizadas (Parte gráfica):
 - [SDL2](https://github.com/libsdl-org/SDL)
 - [SDL_image](https://github.com/libsdl-org/SDL_image)
 - [SDL_ttf](https://github.com/libsdl-org/SDL_ttf)
-
-
-#### 7. Conclusão do Projeto
-Ao final do desenvolvimento, foram adicionados elementos gráficos finais para melhorar a jogabilidade, além da documentação do código e criação do README. 
-
-## Link para o vídeo com a explicação da lógica do jogo
-
-- [Lógica do jogo](https://youtu.be/31gSpLp_tU0)
